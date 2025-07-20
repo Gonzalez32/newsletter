@@ -1,11 +1,12 @@
 <!-- Newsletters Header -->
-<section class="hero is-primary is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered">
+      <h1 class="title is-1 has-text-centered has-text-black">
         📰 Weekly Newsletters
       </h1>
-      <h2 class="subtitle has-text-centered">
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
         Your weekly dose of fantasy football humor and insights
       </h2>
     </div>
@@ -13,12 +14,12 @@
 </section>
 
 <!-- Newsletters List -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <div class="columns is-multiline">
       <% @newsletters.each do |newsletter| %>
         <div class="column is-6">
-          <div class="card <%= newsletter.featured ? 'has-background-warning-light' : '' %>">
+          <div class="card <%= newsletter.featured ? 'has-background-link-light' : '' %>">
             <header class="card-header">
               <p class="card-header-title">
                 <%= newsletter.title %>
@@ -32,10 +33,10 @@
             </header>
             <div class="card-content">
               <div class="content">
-                <p class="subtitle is-6 has-text-grey">
+                <p class="subtitle is-6 has-text-white">
                   Published: <%= newsletter.published_at.strftime("%B %d, %Y") %>
                 </p>
-                <div class="content">
+                <div class="content has-text-white">
                   <%= truncate(newsletter.content, length: 300) %>
                 </div>
               </div>
