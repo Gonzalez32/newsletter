@@ -32,7 +32,7 @@ A beautiful, modern website for managing and displaying fantasy football league 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/newsletter.git
+   git clone https://github.com/Gonzalez32/newsletter.git
    cd newsletter
    ```
 
