@@ -19,7 +19,7 @@
     <div class="columns is-multiline">
       <% @newsletters.each do |newsletter| %>
         <div class="column is-6">
-          <div class="card <%= newsletter.featured ? 'has-background-link-light' : '' %>">
+          <div class="card <%= newsletter.featured ? 'has-background-link' : '' %>">
             <header class="card-header">
               <p class="card-header-title">
                 <%= newsletter.title %>
@@ -66,9 +66,10 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
-        <div class="content has-text-centered has-text-black">
-          <h2 class="title is-3">Newsletter Archive</h2>
-          <p class="subtitle is-5">
+        <div class="content has-text-centered">
+          <h2 class="title is-3 has-text-black">Newsletter Archive</h2>
+          <br>
+          <p class="subtitle is-5 has-text-black">
             We've published <%= @newsletters.count %> newsletters so far this season!
           </p>
           <div class="buttons is-centered">
