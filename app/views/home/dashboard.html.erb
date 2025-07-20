@@ -1,0 +1,219 @@
+<!-- Dashboard Header -->
+<section class="hero is-info is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        📊 League Dashboard
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        Your one-stop shop for all things fantasy football
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-3">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Teams</p>
+              <p class="title is-2"><%= @teams.count %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-info-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Matchups</p>
+              <p class="title is-2"><%= @recent_matchups.count %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-warning-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Current Week</p>
+              <p class="title is-2">12</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-danger-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Weeks Left</p>
+              <p class="title is-2">3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- League Standings -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">🏆 League Standings</h2>
+    <div class="table-container">
+      <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Owner</th>
+            <th>W</th>
+            <th>L</th>
+            <th>T</th>
+            <th>PCT</th>
+            <th>PF</th>
+            <th>PA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teams.each_with_index do |team, index| %>
+            <tr class="<%= index < 6 ? 'has-background-success-light' : '' %>">
+              <td>
+                <span class="tag <%= index < 6 ? 'is-success' : 'is-info' %>">
+                  #<%= index + 1 %>
+                </span>
+              </td>
+              <td>
+                <strong><%= team.name %></strong>
+              </td>
+              <td><%= team.owner %></td>
+              <td><%= team.wins %></td>
+              <td><%= team.losses %></td>
+              <td><%= team.ties %></td>
+              <td>
+                <% total_games = team.wins + team.losses + team.ties %>
+                <% if total_games > 0 %>
+                  <%= number_to_percentage((team.wins.to_f / total_games) * 100, precision: 1) %>
+                <% else %>
+                  0.0%
+                <% end %>
+              </td>
+              <td><%= number_with_precision(team.points_for, precision: 1) %></td>
+              <td><%= number_with_precision(team.points_against, precision: 1) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Matchups -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">⚔️ Recent Matchups</h2>
+    <div class="columns is-multiline">
+      <% @recent_matchups.each do |matchup| %>
+        <div class="column is-6">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Week <%= matchup.week %>, <%= matchup.year %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="columns is-mobile">
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5"><%= matchup.home_team.name %></p>
+                    <p class="subtitle is-6"><%= matchup.home_team.owner %></p>
+                    <p class="title is-4 has-text-primary"><%= number_with_precision(matchup.home_score, precision: 1) %></p>
+                  </div>
+                </div>
+                <div class="column is-2">
+                  <div class="content has-text-centered">
+                    <p class="title is-6">VS</p>
+                  </div>
+                </div>
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5"><%= matchup.away_team.name %></p>
+                    <p class="subtitle is-6"><%= matchup.away_team.owner %></p>
+                    <p class="title is-4 has-text-info"><%= number_with_precision(matchup.away_score, precision: 1) %></p>
+                  </div>
+                </div>
+              </div>
+              <% if matchup.winner %>
+                <div class="has-text-centered mt-3">
+                  <span class="tag is-success is-medium">
+                    🏆 Winner: <%= matchup.winner.name %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Newsletter Preview -->
+<% if @latest_newsletter %>
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">📰 Latest Newsletter</h2>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          <%= @latest_newsletter.title %>
+        </p>
+        <p class="card-header-icon">
+          Week <%= @latest_newsletter.week %>, <%= @latest_newsletter.year %>
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <%= truncate(@latest_newsletter.content, length: 400) %>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a href="<%= weekly_newsletter_path(@latest_newsletter) %>" class="card-footer-item">Read Full Newsletter</a>
+        <a href="<%= weekly_newsletters_path %>" class="card-footer-item">View All Newsletters</a>
+      </footer>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<!-- Quick Actions -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">🚀 Quick Actions</h2>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="buttons is-centered">
+          <a href="<%= weekly_newsletters_path %>" class="button is-primary is-large">
+            📰 Read Newsletters
+          </a>
+          <a href="<%= teams_path %>" class="button is-info is-large">
+            👥 View Teams
+          </a>
+          <a href="<%= matchups_path %>" class="button is-success is-large">
+            ⚔️ View Matchups
+          </a>
+          <a href="<%= players_path %>" class="button is-warning is-large">
+            🏃 Player Stats
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

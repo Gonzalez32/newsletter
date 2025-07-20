@@ -1,0 +1,222 @@
+<!-- Team Header -->
+<section class="hero is-info is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        <%= @team.name %>
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        Owner: <%= @team.owner %>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Team Stats -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-3">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Wins</p>
+              <p class="title is-2"><%= @team.wins %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-danger-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Losses</p>
+              <p class="title is-2"><%= @team.losses %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-warning-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Ties</p>
+              <p class="title is-2"><%= @team.ties %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-info-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Win %</p>
+              <p class="title is-2"><%= number_to_percentage(@team.win_percentage, precision: 1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-multiline mt-4">
+      <div class="column is-6">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Points For</p>
+              <p class="title is-3"><%= number_with_precision(@team.points_for, precision: 1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-6">
+        <div class="card has-background-danger-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Points Against</p>
+              <p class="title is-3"><%= number_with_precision(@team.points_against, precision: 1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Players -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">🏃 Team Roster</h2>
+    <div class="columns is-multiline">
+      <% @players.each do |player| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-content">
+              <div class="content has-text-centered">
+                <p class="title is-5"><%= player.name %></p>
+                <p class="subtitle is-6">
+                  <span class="tag is-info"><%= player.position %></span>
+                </p>
+                <p class="subtitle is-6">
+                  Yahoo ID: <%= player.yahoo_player_id %>
+                </p>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= player_path(player) %>" class="card-footer-item">View Details</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <% if @players.empty? %>
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">No players found</p>
+          <p>This team doesn't have any players assigned yet.</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<!-- Recent Matchups -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">⚔️ Recent Matchups</h2>
+    <div class="columns is-multiline">
+      <% @recent_matchups.each do |matchup| %>
+        <div class="column is-6">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Week <%= matchup.week %>, <%= matchup.year %>
+              </p>
+              <p class="card-header-icon">
+                <% if matchup.winner %>
+                  <span class="tag is-success">🏆 Winner: <%= matchup.winner.name %></span>
+                <% else %>
+                  <span class="tag is-warning">Pending</span>
+                <% end %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="columns is-mobile">
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5 <%= matchup.home_team == @team ? 'has-text-primary' : '' %>">
+                      <%= matchup.home_team.name %>
+                    </p>
+                    <p class="subtitle is-6"><%= matchup.home_team.owner %></p>
+                    <p class="title is-4 has-text-primary"><%= number_with_precision(matchup.home_score, precision: 1) %></p>
+                  </div>
+                </div>
+                <div class="column is-2">
+                  <div class="content has-text-centered">
+                    <p class="title is-6">VS</p>
+                  </div>
+                </div>
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5 <%= matchup.away_team == @team ? 'has-text-primary' : '' %>">
+                      <%= matchup.away_team.name %>
+                    </p>
+                    <p class="subtitle is-6"><%= matchup.away_team.owner %></p>
+                    <p class="title is-4 has-text-info"><%= number_with_precision(matchup.away_score, precision: 1) %></p>
+                  </div>
+                </div>
+              </div>
+              
+              <% if matchup.winner %>
+                <div class="has-text-centered mt-3">
+                  <% if matchup.winner == @team %>
+                    <span class="tag is-success is-medium">
+                      🏆 <%= @team.name %> wins by <%= number_with_precision(matchup.winner == matchup.home_team ? matchup.home_score - matchup.away_score : matchup.away_score - matchup.home_score, precision: 1) %> points
+                    </span>
+                  <% else %>
+                    <span class="tag is-danger is-medium">
+                      💔 <%= @team.name %> loses by <%= number_with_precision(matchup.winner == matchup.home_team ? matchup.home_score - matchup.away_score : matchup.away_score - matchup.home_score, precision: 1) %> points
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= matchup_path(matchup) %>" class="card-footer-item">View Details</a>
+              <a href="<%= team_path(matchup.home_team) %>" class="card-footer-item">Home Team</a>
+              <a href="<%= team_path(matchup.away_team) %>" class="card-footer-item">Away Team</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <% if @recent_matchups.empty? %>
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">No matchups found</p>
+          <p>This team hasn't played any games yet.</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="has-text-centered">
+      <a href="<%= teams_path %>" class="button is-primary is-large">
+        👥 Back to All Teams
+      </a>
+      <a href="<%= root_path %>" class="button is-info is-large">
+        🏈 Back to Home
+      </a>
+    </div>
+  </div>
+</section>

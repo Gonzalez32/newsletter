@@ -1,0 +1,90 @@
+<!-- Matchups Header -->
+<section class="hero is-success is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        ⚔️ League Matchups
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        Every battle, every score, every victory and defeat
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Matchups List -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @matchups.each do |matchup| %>
+        <div class="column is-6">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Week <%= matchup.week %>, <%= matchup.year %>
+              </p>
+              <p class="card-header-icon">
+                <% if matchup.winner %>
+                  <span class="tag is-success">🏆 Winner: <%= matchup.winner.name %></span>
+                <% else %>
+                  <span class="tag is-warning">Pending</span>
+                <% end %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="columns is-mobile">
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5"><%= matchup.home_team.name %></p>
+                    <p class="subtitle is-6"><%= matchup.home_team.owner %></p>
+                    <p class="title is-4 has-text-primary"><%= number_with_precision(matchup.home_score, precision: 1) %></p>
+                  </div>
+                </div>
+                <div class="column is-2">
+                  <div class="content has-text-centered">
+                    <p class="title is-6">VS</p>
+                  </div>
+                </div>
+                <div class="column is-5">
+                  <div class="content has-text-centered">
+                    <p class="title is-5"><%= matchup.away_team.name %></p>
+                    <p class="subtitle is-6"><%= matchup.away_team.owner %></p>
+                    <p class="title is-4 has-text-info"><%= number_with_precision(matchup.away_score, precision: 1) %></p>
+                  </div>
+                </div>
+              </div>
+              
+              <% if matchup.winner %>
+                <div class="has-text-centered mt-3">
+                  <% if matchup.winner == matchup.home_team %>
+                    <span class="tag is-success is-medium">
+                      🏆 <%= matchup.home_team.name %> wins by <%= number_with_precision(matchup.home_score - matchup.away_score, precision: 1) %> points
+                    </span>
+                  <% else %>
+                    <span class="tag is-success is-medium">
+                      🏆 <%= matchup.away_team.name %> wins by <%= number_with_precision(matchup.away_score - matchup.home_score, precision: 1) %> points
+                    </span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= matchup_path(matchup) %>" class="card-footer-item">View Details</a>
+              <a href="<%= team_path(matchup.home_team) %>" class="card-footer-item">Home Team</a>
+              <a href="<%= team_path(matchup.away_team) %>" class="card-footer-item">Away Team</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <% if @matchups.empty? %>
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">No matchups found</p>
+          <p>Check back later for upcoming matchups!</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,158 @@
+<!-- Matchup Header -->
+<section class="hero is-success is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        ⚔️ Week <%= @matchup.week %>, <%= @matchup.year %>
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        <%= @matchup.home_team.name %> vs <%= @matchup.away_team.name %>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Matchup Details -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Matchup Details
+            </p>
+            <p class="card-header-icon">
+              <% if @matchup.winner %>
+                <span class="tag is-success is-large">🏆 Winner: <%= @matchup.winner.name %></span>
+              <% else %>
+                <span class="tag is-warning is-large">Pending</span>
+              <% end %>
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="columns">
+              <!-- Home Team -->
+              <div class="column is-6">
+                <div class="content has-text-centered">
+                  <h3 class="title is-4 has-text-primary"><%= @matchup.home_team.name %></h3>
+                  <p class="subtitle is-6">Owner: <%= @matchup.home_team.owner %></p>
+                  <p class="title is-1 has-text-primary"><%= number_with_precision(@matchup.home_score, precision: 1) %></p>
+                  <p class="subtitle is-6">Points</p>
+                  
+                  <div class="mt-4">
+                    <a href="<%= team_path(@matchup.home_team) %>" class="button is-primary">
+                      View Team Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- VS -->
+              <div class="column is-1">
+                <div class="content has-text-centered">
+                  <p class="title is-2">VS</p>
+                </div>
+              </div>
+              
+              <!-- Away Team -->
+              <div class="column is-6">
+                <div class="content has-text-centered">
+                  <h3 class="title is-4 has-text-info"><%= @matchup.away_team.name %></h3>
+                  <p class="subtitle is-6">Owner: <%= @matchup.away_team.owner %></p>
+                  <p class="title is-1 has-text-info"><%= number_with_precision(@matchup.away_score, precision: 1) %></p>
+                  <p class="subtitle is-6">Points</p>
+                  
+                  <div class="mt-4">
+                    <a href="<%= team_path(@matchup.away_team) %>" class="button is-info">
+                      View Team Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Result Summary -->
+            <% if @matchup.winner %>
+              <div class="has-text-centered mt-5">
+                <% if @matchup.winner == @matchup.home_team %>
+                  <div class="notification is-success">
+                    <p class="title is-4">🏆 <%= @matchup.home_team.name %> wins!</p>
+                    <p class="subtitle is-6">
+                      Won by <%= number_with_precision(@matchup.home_score - @matchup.away_score, precision: 1) %> points
+                    </p>
+                  </div>
+                <% else %>
+                  <div class="notification is-success">
+                    <p class="title is-4">🏆 <%= @matchup.away_team.name %> wins!</p>
+                    <p class="subtitle is-6">
+                      Won by <%= number_with_precision(@matchup.away_score - @matchup.home_score, precision: 1) %> points
+                    </p>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Comparison -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">📊 Team Comparison</h2>
+    <div class="columns">
+      <div class="column is-6">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <%= @matchup.home_team.name %> Season Stats
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <p><strong>Record:</strong> <%= @matchup.home_team.wins %>-<%= @matchup.home_team.losses %><%= @matchup.home_team.ties > 0 ? "-#{@matchup.home_team.ties}" : "" %></p>
+              <p><strong>Win %:</strong> <%= number_to_percentage(@matchup.home_team.win_percentage, precision: 1) %></p>
+              <p><strong>Points For:</strong> <%= number_with_precision(@matchup.home_team.points_for, precision: 1) %></p>
+              <p><strong>Points Against:</strong> <%= number_with_precision(@matchup.home_team.points_against, precision: 1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-6">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <%= @matchup.away_team.name %> Season Stats
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <p><strong>Record:</strong> <%= @matchup.away_team.wins %>-<%= @matchup.away_team.losses %><%= @matchup.away_team.ties > 0 ? "-#{@matchup.away_team.ties}" : "" %></p>
+              <p><strong>Win %:</strong> <%= number_to_percentage(@matchup.away_team.win_percentage, precision: 1) %></p>
+              <p><strong>Points For:</strong> <%= number_with_precision(@matchup.away_team.points_for, precision: 1) %></p>
+              <p><strong>Points Against:</strong> <%= number_with_precision(@matchup.away_team.points_against, precision: 1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="has-text-centered">
+      <a href="<%= matchups_path %>" class="button is-primary is-large">
+        ⚔️ Back to All Matchups
+      </a>
+      <a href="<%= root_path %>" class="button is-info is-large">
+        🏈 Back to Home
+      </a>
+    </div>
+  </div>
+</section>

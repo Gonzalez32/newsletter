@@ -1,0 +1,252 @@
+// @charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Set your brand colors with better contrast
+$primary: #1e40af; // Darker blue for better contrast
+$link: #2563eb; // Bright blue for links
+$info: #0891b2; // Darker cyan
+$success: #059669; // Darker green
+$warning: #d97706; // Darker orange
+$danger: #dc2626; // Darker red
+
+// Update Bulma's global variables
+$family-sans-serif: "Inter", sans-serif;
+$body-background-color: #ffffff; // Pure white background
+$text: #1f2937; // Dark gray text for better readability
+$text-light: #6b7280; // Medium gray for secondary text
+
+// Update some of Bulma's component variables
+$control-border-width: 2px;
+$input-border-color: #d1d5db;
+$input-shadow: none;
+
+// Custom styles for better readability
+.hero.is-primary {
+  background: linear-gradient(135deg, $primary 0%, #3b82f6 100%);
+}
+
+.hero.is-info {
+  background: linear-gradient(135deg, $info 0%, #06b6d4 100%);
+}
+
+.hero.is-success {
+  background: linear-gradient(135deg, $success 0%, #10b981 100%);
+}
+
+.hero.is-warning {
+  background: linear-gradient(135deg, $warning 0%, #f59e0b 100%);
+}
+
+// Improve card readability
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.card-content {
+  color: $text;
+}
+
+// Better table styling
+.table {
+  background-color: white;
+  
+  th {
+    background-color: #f9fafb;
+    color: $text;
+    font-weight: 600;
+  }
+  
+  td {
+    color: $text;
+  }
+}
+
+// Improve button contrast
+.button.is-primary {
+  background-color: $primary;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #1e3a8a;
+  }
+}
+
+.button.is-info {
+  background-color: $info;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #0e7490;
+  }
+}
+
+.button.is-success {
+  background-color: $success;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #047857;
+  }
+}
+
+.button.is-warning {
+  background-color: $warning;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #b45309;
+  }
+}
+
+.button.is-danger {
+  background-color: $danger;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: #b91c1c;
+  }
+}
+
+// Better tag styling
+.tag {
+  font-weight: 500;
+}
+
+.tag.is-primary {
+  background-color: $primary;
+  color: white;
+}
+
+.tag.is-info {
+  background-color: $info;
+  color: white;
+}
+
+.tag.is-success {
+  background-color: $success;
+  color: white;
+}
+
+.tag.is-warning {
+  background-color: $warning;
+  color: white;
+}
+
+.tag.is-danger {
+  background-color: $danger;
+  color: white;
+}
+
+// Improve notification readability
+.notification {
+  border: 1px solid #e5e7eb;
+  
+  &.is-info {
+    background-color: #eff6ff;
+    color: #1e40af;
+    border-color: #bfdbfe;
+  }
+  
+  &.is-success {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+  }
+  
+  &.is-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border-color: #fcd34d;
+  }
+  
+  &.is-danger {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fca5a5;
+  }
+}
+
+// Better navbar styling
+.navbar.is-primary {
+  background-color: $primary;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navbar-item {
+  color: white !important;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+// Improve footer readability
+.footer {
+  background-color: #f8fafc; // Light gray background
+  color: $text;
+  border-top: 1px solid #e2e8f0;
+}
+
+// Better text contrast for headings
+.title {
+  color: $text;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: $text-light;
+  font-weight: 500;
+}
+
+// Improve content readability
+.content {
+  color: $text;
+  
+  p {
+    line-height: 1.6;
+  }
+  
+  strong {
+    color: $text;
+    font-weight: 600;
+  }
+}
+
+// Section backgrounds
+.section {
+  background-color: #ffffff;
+}
+
+.section.has-background-light {
+  background-color: #f8fafc !important; // Light gray for sections
+}
+
+// Card background variations
+.card.has-background-info-light {
+  background-color: #eff6ff !important;
+}
+
+.card.has-background-success-light {
+  background-color: #ecfdf5 !important;
+}
+
+.card.has-background-warning-light {
+  background-color: #fffbeb !important;
+}
+
+.card.has-background-danger-light {
+  background-color: #fef2f2 !important;
+}
+
+// Import Bulma
+@import 'bulma/bulma';

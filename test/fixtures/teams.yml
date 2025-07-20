@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  owner: MyString
+  yahoo_team_id: MyString
+  wins: 1
+  losses: 1
+  ties: 1
+  points_for: 9.99
+  points_against: 9.99
+
+two:
+  name: MyString
+  owner: MyString
+  yahoo_team_id: MyString
+  wins: 1
+  losses: 1
+  ties: 1
+  points_for: 9.99
+  points_against: 9.99

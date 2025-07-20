@@ -1,0 +1,116 @@
+<!-- Teams Header -->
+<section class="hero is-info is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered has-text-white">
+        🏆 League Standings
+      </h1>
+      <h2 class="subtitle has-text-centered has-text-white">
+        See where your team stands in the race for the championship
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Standings Table -->
+<section class="section">
+  <div class="container">
+    <div class="table-container">
+      <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Team</th>
+            <th>Owner</th>
+            <th>W</th>
+            <th>L</th>
+            <th>T</th>
+            <th>PCT</th>
+            <th>PF</th>
+            <th>PA</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teams.each_with_index do |team, index| %>
+            <tr class="<%= index < 6 ? 'has-background-success-light' : '' %>">
+              <td>
+                <span class="tag <%= index < 6 ? 'is-success' : 'is-info' %>">
+                  #<%= index + 1 %>
+                </span>
+              </td>
+              <td>
+                <strong><%= team.name %></strong>
+              </td>
+              <td><%= team.owner %></td>
+              <td><%= team.wins %></td>
+              <td><%= team.losses %></td>
+              <td><%= team.ties %></td>
+              <td>
+                <%= number_to_percentage(team.win_percentage, precision: 1) %>
+              </td>
+              <td><%= number_with_precision(team.points_for, precision: 1) %></td>
+              <td><%= number_with_precision(team.points_against, precision: 1) %></td>
+              <td>
+                <a href="<%= team_path(team) %>" class="button is-small is-primary">
+                  View Details
+                </a>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Team Cards -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">👥 All Teams</h2>
+    <div class="columns is-multiline">
+      <% @teams.each_with_index do |team, index| %>
+        <div class="column is-4">
+          <div class="card <%= index < 6 ? 'has-background-warning-light' : '' %>">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <div class="has-text-centered">
+                    <span class="tag is-large <%= index < 6 ? 'is-warning' : 'is-info' %>">
+                      #<%= index + 1 %>
+                    </span>
+                  </div>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4"><%= team.name %></p>
+                  <p class="subtitle is-6">Owner: <%= team.owner %></p>
+                  <p class="subtitle is-6">
+                    Record: <%= team.wins %>-<%= team.losses %><%= team.ties > 0 ? "-#{team.ties}" : "" %>
+                  </p>
+                  <p class="subtitle is-6">
+                    Win %: <%= number_to_percentage(team.win_percentage, precision: 1) %>
+                  </p>
+                </div>
+              </div>
+              <div class="content mt-3">
+                <div class="columns is-mobile">
+                  <div class="column">
+                    <p class="heading">Points For</p>
+                    <p class="title is-5 has-text-success"><%= number_with_precision(team.points_for, precision: 1) %></p>
+                  </div>
+                  <div class="column">
+                    <p class="heading">Points Against</p>
+                    <p class="title is-5 has-text-danger"><%= number_with_precision(team.points_against, precision: 1) %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= team_path(team) %>" class="card-footer-item">View Details</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

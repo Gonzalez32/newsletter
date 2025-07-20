@@ -1,0 +1,96 @@
+<!-- Players Header -->
+<section class="hero is-warning is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        🏃 Player Roster
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        All the players making moves in our fantasy league
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Players by Position -->
+<section class="section">
+  <div class="container">
+    <% ['QB', 'RB', 'WR', 'TE'].each do |position| %>
+      <h2 class="title is-3 has-text-centered mb-5">
+        <%= position %>s
+      </h2>
+      <div class="columns is-multiline">
+        <% @players.select { |p| p.position == position }.each do |player| %>
+          <div class="column is-3">
+            <div class="card">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <p class="title is-5"><%= player.name %></p>
+                  <p class="subtitle is-6">
+                    <span class="tag is-info"><%= player.position %></span>
+                  </p>
+                  <p class="subtitle is-6">
+                    Team: <strong><%= player.team.name %></strong>
+                  </p>
+                  <p class="subtitle is-6">
+                    Owner: <%= player.team.owner %>
+                  </p>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="<%= player_path(player) %>" class="card-footer-item">View Details</a>
+                <a href="<%= team_path(player.team) %>" class="card-footer-item">Team Page</a>
+              </footer>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+      <% if @players.select { |p| p.position == position }.empty? %>
+        <div class="has-text-centered mb-5">
+          <div class="notification is-light">
+            <p>No <%= position %>s found</p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<!-- Players by Team -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">👥 Players by Team</h2>
+    <div class="columns is-multiline">
+      <% Team.all.each do |team| %>
+        <div class="column is-6">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                <%= team.name %>
+              </p>
+              <p class="card-header-icon">
+                <%= team.players.count %> players
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <p class="subtitle is-6">Owner: <%= team.owner %></p>
+                <div class="tags">
+                  <% team.players.each do |player| %>
+                    <span class="tag is-info">
+                      <%= player.name %> (<%= player.position %>)
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= team_path(team) %>" class="card-footer-item">View Team</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

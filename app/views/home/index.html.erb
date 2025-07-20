@@ -1,0 +1,166 @@
+<!-- Hero Section -->
+<section class="hero is-medium is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered has-text-black">
+        🏈 Fantasy Football Newsletter
+      </h1>
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
+        Where stats meet laughs, and trash talk becomes an art form
+      </h2>
+      <br>
+      <br>
+      <div class="has-text-centered">
+        <a href="<%= weekly_newsletters_path %>" class="button is-light is-large">
+          Read Latest Newsletter
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="section has-background-dark">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-3">
+        <div class="card has-background-info-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Newsletters</p>
+              <p class="title is-2 has-text-info"><%= @total_newsletters %></p>
+              <p class="subtitle has-text-black">Weeks of laughs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">League Teams</p>
+              <p class="title is-2 has-text-success"><%= @total_teams %></p>
+              <p class="subtitle has-text-black">Competitors</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-warning-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Current Week</p>
+              <p class="title is-2 has-text-warning">12</p>
+              <p class="subtitle has-text-black">Regular Season</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3">
+        <div class="card has-background-danger-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Playoff Spots</p>
+              <p class="title is-2 has-text-danger">6</p>
+              <p class="subtitle has-text-black">Up for grabs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Newsletter Section -->
+<% if @latest_newsletter %>
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">📰 Latest Newsletter</h2>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          <%= @latest_newsletter.title %>
+        </p>
+        <p class="card-header-icon">
+          Week <%= @latest_newsletter.week %>, <%= @latest_newsletter.year %>
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="content has-text-white">
+          <%= truncate(@latest_newsletter.content, length: 300) %>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a href="<%= weekly_newsletter_path(@latest_newsletter) %>" class="card-footer-item">Read Full Newsletter</a>
+        <a href="<%= weekly_newsletters_path %>" class="card-footer-item">View All Newsletters</a>
+      </footer>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<!-- Top Teams Section -->
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">🏆 League Standings</h2>
+    <div class="columns is-multiline">
+      <% @teams.each_with_index do |team, index| %>
+        <div class="column is-4">
+          <div class="card <%= index == 0 ? 'has-background-link' : '' %>">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <div class="has-text-centered">
+                    <span class="tag is-large <%= index == 0 ? 'is-warning' : 'is-info' %>">
+                      #<%= index + 1 %>
+                    </span>
+                  </div>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4 has-text-white"><%= team.name %></p>
+                  <p class="subtitle is-6">Owner: <%= team.owner %></p>
+                  <p class="subtitle is-6">
+                    Record: <%= team.wins %>-<%= team.losses %><%= team.ties > 0 ? "-#{team.ties}" : "" %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="has-text-centered mt-5">
+      <a href="<%= teams_path %>" class="button is-primary is-medium">View Full Standings</a>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <h2 class="title is-3 has-text-black">Ready to dive deeper?</h2>
+          <br>
+          <p class="subtitle is-5 has-text-black">
+            Check out the full dashboard for detailed stats, matchups, and more!
+          </p>
+          <br>
+          <div class="buttons is-centered">
+            <a href="<%= dashboard_path %>" class="button is-primary is-large">
+              🏈 Go to Dashboard
+            </a>
+            <a href="<%= matchups_path %>" class="button is-info is-large">
+              📊 View Matchups
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

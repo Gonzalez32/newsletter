@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Fantasy Football Newsletter" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="Fantasy Football Newsletter - Your weekly dose of stats, laughs, and trash talk">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="<%= root_path %>">
+          <strong>🏈 Fantasy Football Newsletter</strong>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="<%= root_path %>">
+            Home
+          </a>
+
+          <a class="navbar-item" href="<%= weekly_newsletters_path %>">
+            Newsletters
+          </a>
+
+          <a class="navbar-item" href="<%= teams_path %>">
+            Teams
+          </a>
+
+          <a class="navbar-item" href="<%= matchups_path %>">
+            Matchups
+          </a>
+
+          <a class="navbar-item" href="<%= dashboard_path %>">
+            Dashboard
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light" href="<%= about_path %>">
+                About
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="section has-background-warning">
+      <div class="container">
+        <% if notice %>
+          <div class="notification is-success">
+            <button class="delete" aria-label="delete"></button>
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert %>
+          <div class="notification is-danger">
+            <button class="delete" aria-label="delete"></button>
+            <%= alert %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer has-background-dark">
+      <div class="content has-text-centered has-text-white">
+        <p>
+          <strong class="has-text-white">Fantasy Football Newsletter</strong> - Bringing the laughs and stats to your league since 2024.
+        </p>
+        <p>
+          Built with ❤️ and 🏈 using Ruby on Rails & Bulma
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

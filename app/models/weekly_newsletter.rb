@@ -1,0 +1,2 @@
+class WeeklyNewsletter < ApplicationRecord
+end

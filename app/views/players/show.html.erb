@@ -1,0 +1,108 @@
+<!-- Player Header -->
+<section class="hero is-warning is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        🏃 <%= @player.name %>
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        <%= @player.position %> • <%= @player.team.name %>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Player Details -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="card">
+          <div class="card-content">
+            <div class="columns">
+              <div class="column is-6">
+                <div class="content">
+                  <h3 class="title is-4">Player Information</h3>
+                  <p><strong>Name:</strong> <%= @player.name %></p>
+                  <p><strong>Position:</strong> 
+                    <span class="tag is-info"><%= @player.position %></span>
+                  </p>
+                  <p><strong>Yahoo Player ID:</strong> <%= @player.yahoo_player_id %></p>
+                  <p><strong>Team:</strong> 
+                    <a href="<%= team_path(@player.team) %>" class="has-text-primary">
+                      <%= @player.team.name %>
+                    </a>
+                  </p>
+                  <p><strong>Team Owner:</strong> <%= @player.team.owner %></p>
+                </div>
+              </div>
+              
+              <div class="column is-6">
+                <div class="content">
+                  <h3 class="title is-4">Team Information</h3>
+                  <p><strong>Team Name:</strong> <%= @player.team.name %></p>
+                  <p><strong>Owner:</strong> <%= @player.team.owner %></p>
+                  <p><strong>Record:</strong> <%= @player.team.wins %>-<%= @player.team.losses %><%= @player.team.ties > 0 ? "-#{@player.team.ties}" : "" %></p>
+                  <p><strong>Win %:</strong> <%= number_to_percentage(@player.team.win_percentage, precision: 1) %></p>
+                  <p><strong>Points For:</strong> <%= number_with_precision(@player.team.points_for, precision: 1) %></p>
+                  <p><strong>Points Against:</strong> <%= number_with_precision(@player.team.points_against, precision: 1) %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Roster -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">👥 Team Roster</h2>
+    <div class="columns is-multiline">
+      <% @player.team.players.order(:position, :name).each do |teammate| %>
+        <div class="column is-3">
+          <div class="card <%= teammate == @player ? 'has-background-warning-light' : '' %>">
+            <div class="card-content">
+              <div class="content has-text-centered">
+                <p class="title is-5">
+                  <%= teammate.name %>
+                  <% if teammate == @player %>
+                    <span class="tag is-warning is-small">Current Player</span>
+                  <% end %>
+                </p>
+                <p class="subtitle is-6">
+                  <span class="tag is-info"><%= teammate.position %></span>
+                </p>
+                <p class="subtitle is-6">
+                  Yahoo ID: <%= teammate.yahoo_player_id %>
+                </p>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="<%= player_path(teammate) %>" class="card-footer-item">View Details</a>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="has-text-centered">
+      <a href="<%= players_path %>" class="button is-primary is-large">
+        🏃 Back to All Players
+      </a>
+      <a href="<%= team_path(@player.team) %>" class="button is-info is-large">
+        👥 View Team
+      </a>
+      <a href="<%= root_path %>" class="button is-success is-large">
+        🏈 Back to Home
+      </a>
+    </div>
+  </div>
+</section>
