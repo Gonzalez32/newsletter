@@ -82,15 +82,15 @@
     <h2 class="title is-3 has-text-centered mb-5 has-text-white">📰 Latest Newsletter</h2>
     <div class="card">
       <header class="card-header">
-        <p class="card-header-title">
+        <p class="card-header-title has-text-black">
           <%= @latest_newsletter.title %>
         </p>
-        <p class="card-header-icon">
+        <p class="card-header-icon has-text-black">
           Week <%= @latest_newsletter.week %>, <%= @latest_newsletter.year %>
         </p>
       </header>
       <div class="card-content">
-        <div class="content has-text-white">
+        <div class="content has-text-black">
           <%= truncate(@latest_newsletter.content, length: 300) %>
         </div>
       </div>
@@ -121,9 +121,9 @@
                   </div>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4 has-text-white"><%= team.name %></p>
-                  <p class="subtitle is-6">Owner: <%= team.owner %></p>
-                  <p class="subtitle is-6">
+                  <p class="title is-4 has-text-black"><%= team.name %></p>
+                  <p class="subtitle is-6 has-text-black">Owner: <%= team.owner %></p>
+                  <p class="subtitle is-6 has-text-black">
                     Record: <%= team.wins %>-<%= team.losses %><%= team.ties > 0 ? "-#{team.ties}" : "" %>
                   </p>
                 </div>
