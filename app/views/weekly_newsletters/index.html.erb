@@ -1,11 +1,12 @@
 <!-- Newsletters Header -->
-<section class="hero is-primary is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered">
+      <h1 class="title is-1 has-text-centered has-text-black">
         📰 Weekly Newsletters
       </h1>
-      <h2 class="subtitle has-text-centered">
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
         Your weekly dose of fantasy football humor and insights
       </h2>
     </div>
@@ -13,25 +14,25 @@
 </section>
 
 <!-- Newsletters List -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <div class="columns is-multiline">
       <% @newsletters.each do |newsletter| %>
         <div class="column is-6">
           <div class="card <%= newsletter.featured ? 'has-background-warning-light' : '' %>">
             <header class="card-header">
-              <p class="card-header-title">
+              <p class="card-header-title has-text-black">
                 <%= newsletter.title %>
                 <% if newsletter.featured %>
                   <span class="tag is-warning ml-2">Featured</span>
                 <% end %>
               </p>
-              <p class="card-header-icon">
+              <p class="card-header-icon has-text-black">
                 Week <%= newsletter.week %>, <%= newsletter.year %>
               </p>
             </header>
             <div class="card-content">
-              <div class="content">
+              <div class="content has-text-black">
                 <p class="subtitle is-6 has-text-grey">
                   Published: <%= newsletter.published_at.strftime("%B %d, %Y") %>
                 </p>
@@ -66,10 +67,12 @@
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content has-text-centered">
-          <h2 class="title is-3">Newsletter Archive</h2>
-          <p class="subtitle is-5">
+          <h2 class="title is-3 has-text-black">Newsletter Archive</h2>
+          <br>
+          <p class="subtitle is-5 has-text-black">
             We've published <%= @newsletters.count %> newsletters so far this season!
           </p>
+          <br>
           <div class="buttons is-centered">
             <a href="<%= root_path %>" class="button is-primary is-large">
               🏈 Back to Home

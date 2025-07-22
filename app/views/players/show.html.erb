@@ -2,10 +2,10 @@
 <section class="hero is-warning is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered">
+      <h1 class="title is-1 has-text-centered has-text-white">
         🏃 <%= @player.name %>
       </h1>
-      <h2 class="subtitle has-text-centered">
+      <h2 class="subtitle has-text-centered has-text-white">
         <%= @player.position %> • <%= @player.team.name %>
       </h2>
     </div>
@@ -13,7 +13,7 @@
 </section>
 
 <!-- Player Details -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -21,7 +21,7 @@
           <div class="card-content">
             <div class="columns">
               <div class="column is-6">
-                <div class="content">
+                <div class="content has-text-black">
                   <h3 class="title is-4">Player Information</h3>
                   <p><strong>Name:</strong> <%= @player.name %></p>
                   <p><strong>Position:</strong> 
@@ -38,7 +38,7 @@
               </div>
               
               <div class="column is-6">
-                <div class="content">
+                <div class="content has-text-black">
                   <h3 class="title is-4">Team Information</h3>
                   <p><strong>Team Name:</strong> <%= @player.team.name %></p>
                   <p><strong>Owner:</strong> <%= @player.team.owner %></p>
@@ -57,15 +57,15 @@
 </section>
 
 <!-- Team Roster -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
-    <h2 class="title is-3 has-text-centered mb-5">👥 Team Roster</h2>
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">👥 Team Roster</h2>
     <div class="columns is-multiline">
       <% @player.team.players.order(:position, :name).each do |teammate| %>
         <div class="column is-3">
           <div class="card <%= teammate == @player ? 'has-background-warning-light' : '' %>">
             <div class="card-content">
-              <div class="content has-text-centered">
+              <div class="content has-text-centered has-text-black">
                 <p class="title is-5">
                   <%= teammate.name %>
                   <% if teammate == @player %>

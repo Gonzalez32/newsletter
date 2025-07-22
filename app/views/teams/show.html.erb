@@ -2,10 +2,10 @@
 <section class="hero is-info is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered">
+      <h1 class="title is-1 has-text-centered has-text-white">
         <%= @team.name %>
       </h1>
-      <h2 class="subtitle has-text-centered">
+      <h2 class="subtitle has-text-centered has-text-white">
         Owner: <%= @team.owner %>
       </h2>
     </div>
@@ -13,7 +13,7 @@
 </section>
 
 <!-- Team Stats -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-3">
@@ -21,7 +21,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Wins</p>
-              <p class="title is-2"><%= @team.wins %></p>
+              <p class="title is-2 has-text-success"><%= @team.wins %></p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Losses</p>
-              <p class="title is-2"><%= @team.losses %></p>
+              <p class="title is-2 has-text-danger"><%= @team.losses %></p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Ties</p>
-              <p class="title is-2"><%= @team.ties %></p>
+              <p class="title is-2 has-text-warning"><%= @team.ties %></p>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Win %</p>
-              <p class="title is-2"><%= number_to_percentage(@team.win_percentage, precision: 1) %></p>
+              <p class="title is-2 has-text-info"><%= number_to_percentage(@team.win_percentage, precision: 1) %></p>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Points For</p>
-              <p class="title is-3"><%= number_with_precision(@team.points_for, precision: 1) %></p>
+              <p class="title is-3 has-text-success"><%= number_with_precision(@team.points_for, precision: 1) %></p>
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
           <div class="card-content">
             <div class="content has-text-centered">
               <p class="heading">Points Against</p>
-              <p class="title is-3"><%= number_with_precision(@team.points_against, precision: 1) %></p>
+              <p class="title is-3 has-text-danger"><%= number_with_precision(@team.points_against, precision: 1) %></p>
             </div>
           </div>
         </div>
@@ -88,15 +88,15 @@
 </section>
 
 <!-- Team Players -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
-    <h2 class="title is-3 has-text-centered mb-5">🏃 Team Roster</h2>
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">🏃 Team Roster</h2>
     <div class="columns is-multiline">
       <% @players.each do |player| %>
         <div class="column is-4">
           <div class="card">
             <div class="card-content">
-              <div class="content has-text-centered">
+              <div class="content has-text-centered has-text-black">
                 <p class="title is-5"><%= player.name %></p>
                 <p class="subtitle is-6">
                   <span class="tag is-info"><%= player.position %></span>
@@ -126,18 +126,18 @@
 </section>
 
 <!-- Recent Matchups -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
-    <h2 class="title is-3 has-text-centered mb-5">⚔️ Recent Matchups</h2>
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">⚔️ Recent Matchups</h2>
     <div class="columns is-multiline">
       <% @recent_matchups.each do |matchup| %>
         <div class="column is-6">
           <div class="card">
             <header class="card-header">
-              <p class="card-header-title">
+              <p class="card-header-title has-text-black">
                 Week <%= matchup.week %>, <%= matchup.year %>
               </p>
-              <p class="card-header-icon">
+              <p class="card-header-icon has-text-black">
                 <% if matchup.winner %>
                   <span class="tag is-success">🏆 Winner: <%= matchup.winner.name %></span>
                 <% else %>
@@ -148,7 +148,7 @@
             <div class="card-content">
               <div class="columns is-mobile">
                 <div class="column is-5">
-                  <div class="content has-text-centered">
+                  <div class="content has-text-centered has-text-black">
                     <p class="title is-5 <%= matchup.home_team == @team ? 'has-text-primary' : '' %>">
                       <%= matchup.home_team.name %>
                     </p>
@@ -162,7 +162,7 @@
                   </div>
                 </div>
                 <div class="column is-5">
-                  <div class="content has-text-centered">
+                  <div class="content has-text-centered has-text-black">
                     <p class="title is-5 <%= matchup.away_team == @team ? 'has-text-primary' : '' %>">
                       <%= matchup.away_team.name %>
                     </p>

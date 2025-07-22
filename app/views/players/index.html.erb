@@ -2,10 +2,10 @@
 <section class="hero is-warning is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered">
+      <h1 class="title is-1 has-text-centered has-text-white">
         🏃 Player Roster
       </h1>
-      <h2 class="subtitle has-text-centered">
+      <h2 class="subtitle has-text-centered has-text-white">
         All the players making moves in our fantasy league
       </h2>
     </div>
@@ -13,10 +13,10 @@
 </section>
 
 <!-- Players by Position -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <% ['QB', 'RB', 'WR', 'TE'].each do |position| %>
-      <h2 class="title is-3 has-text-centered mb-5">
+      <h2 class="title is-3 has-text-centered mb-5 has-text-white">
         <%= position %>s
       </h2>
       <div class="columns is-multiline">
@@ -24,7 +24,7 @@
           <div class="column is-3">
             <div class="card">
               <div class="card-content">
-                <div class="content has-text-centered">
+                <div class="content has-text-centered has-text-black">
                   <p class="title is-5"><%= player.name %></p>
                   <p class="subtitle is-6">
                     <span class="tag is-info"><%= player.position %></span>
@@ -58,24 +58,24 @@
 </section>
 
 <!-- Players by Team -->
-<section class="section has-background-light">
+<section class="section has-background-dark">
   <div class="container">
-    <h2 class="title is-3 has-text-centered mb-5">👥 Players by Team</h2>
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">👥 Players by Team</h2>
     <div class="columns is-multiline">
       <% Team.all.each do |team| %>
         <div class="column is-6">
           <div class="card">
             <header class="card-header">
-              <p class="card-header-title">
+              <p class="card-header-title has-text-black">
                 <%= team.name %>
               </p>
-              <p class="card-header-icon">
+              <p class="card-header-icon has-text-black">
                 <%= team.players.count %> players
               </p>
             </header>
             <div class="card-content">
               <div class="content">
-                <p class="subtitle is-6">Owner: <%= team.owner %></p>
+                <p class="subtitle is-6 has-text-black">Owner: <%= team.owner %></p>
                 <div class="tags">
                   <% team.players.each do |player| %>
                     <span class="tag is-info">

@@ -1,5 +1,5 @@
 <!-- Teams Header -->
-<section class="hero is-info is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
       <h1 class="title is-1 has-text-centered has-text-black">
@@ -14,44 +14,44 @@
 </section>
 
 <!-- Standings Table -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
     <div class="table-container">
       <table class="table is-fullwidth is-striped is-hoverable">
         <thead>
           <tr>
-            <th>Rank</th>
-            <th>Team</th>
-            <th>Owner</th>
-            <th>W</th>
-            <th>L</th>
-            <th>T</th>
-            <th>PCT</th>
-            <th>PF</th>
-            <th>PA</th>
-            <th>Actions</th>
+            <th class="has-text-black">Rank</th>
+            <th class="has-text-black">Team</th>
+            <th class="has-text-black">Owner</th>
+            <th class="has-text-black">W</th>
+            <th class="has-text-black">L</th>
+            <th class="has-text-black">T</th>
+            <th class="has-text-black">PCT</th>
+            <th class="has-text-black">PF</th>
+            <th class="has-text-black">PA</th>
+            <th class="has-text-black">Actions</th>
           </tr>
         </thead>
         <tbody>
           <% @teams.each_with_index do |team, index| %>
-            <tr class="<%= index < 6 ? 'has-background-success-light' : '' %>">
+            <tr class="<%= index < 6 ? 'has-background-success-light' : 'has-background-info-light' %>">
               <td>
                 <span class="tag <%= index < 6 ? 'is-success' : 'is-info' %>">
                   #<%= index + 1 %>
                 </span>
               </td>
               <td>
-                <strong><%= team.name %></strong>
+                <strong class="has-text-black"><%= team.name %></strong>
               </td>
-              <td><%= team.owner %></td>
-              <td><%= team.wins %></td>
-              <td><%= team.losses %></td>
-              <td><%= team.ties %></td>
-              <td>
+              <td class="has-text-black"><%= team.owner %></td>
+              <td class="has-text-black"><%= team.wins %></td>
+              <td class="has-text-black"><%= team.losses %></td>
+              <td class="has-text-black"><%= team.ties %></td>
+              <td class="has-text-black">
                 <%= number_to_percentage(team.win_percentage, precision: 1) %>
               </td>
-              <td><%= number_with_precision(team.points_for, precision: 1) %></td>
-              <td><%= number_with_precision(team.points_against, precision: 1) %></td>
+              <td class="has-text-black"><%= number_with_precision(team.points_for, precision: 1) %></td>
+              <td class="has-text-black"><%= number_with_precision(team.points_against, precision: 1) %></td>
               <td>
                 <a href="<%= team_path(team) %>" class="button is-small is-primary">
                   View Details
@@ -66,9 +66,9 @@
 </section>
 
 <!-- Team Cards -->
-<section class="section">
+<section class="section has-background-dark">
   <div class="container">
-    <h2 class="title is-3 has-text-centered mb-5">👥 All Teams</h2>
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">👥 All Teams</h2>
     <div class="columns is-multiline">
       <% @teams.each_with_index do |team, index| %>
         <div class="column is-4">
@@ -83,12 +83,12 @@
                   </div>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4"><%= team.name %></p>
-                  <p class="subtitle is-6">Owner: <%= team.owner %></p>
-                  <p class="subtitle is-6">
+                  <p class="title is-4 has-text-black"><%= team.name %></p>
+                  <p class="subtitle is-6 has-text-black">Owner: <%= team.owner %></p>
+                  <p class="subtitle is-6 has-text-black">
                     Record: <%= team.wins %>-<%= team.losses %><%= team.ties > 0 ? "-#{team.ties}" : "" %>
                   </p>
-                  <p class="subtitle is-6">
+                  <p class="subtitle is-6 has-text-black">
                     Win %: <%= number_to_percentage(team.win_percentage, precision: 1) %>
                   </p>
                 </div>
