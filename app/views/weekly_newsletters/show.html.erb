@@ -1,17 +1,19 @@
 <!-- Newsletter Header -->
-<section class="hero is-primary is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered has-text-white">
+      <h1 class="title is-1 has-text-centered has-text-black">
         📰 <%= @newsletter.title %>
       </h1>
-      <h2 class="subtitle has-text-centered has-text-white">
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
         Week <%= @newsletter.week %>, <%= @newsletter.year %>
       </h2>
       <div class="has-text-centered">
-        <p class="subtitle is-6 has-text-white">
+        <p class="subtitle is-6 has-text-black">
           Published: <%= @newsletter.published_at.strftime("%B %d, %Y at %I:%M %p") %>
         </p>
+        <br>
         <% if @newsletter.featured %>
           <span class="tag is-warning is-medium">Featured Newsletter</span>
         <% end %>
@@ -52,7 +54,7 @@
         <div class="card has-background-info-light">
           <div class="card-content">
             <div class="content has-text-centered">
-              <h3 class="title is-4">Newsletter Details</h3>
+              <h3 class="title is-4 has-text-black">Newsletter Details</h3>
               <p><strong>Week:</strong> <%= @newsletter.week %></p>
               <p><strong>Year:</strong> <%= @newsletter.year %></p>
               <p><strong>Published:</strong> <%= @newsletter.published_at.strftime("%B %d, %Y") %></p>
@@ -66,7 +68,7 @@
         <div class="card has-background-success-light">
           <div class="card-content">
             <div class="content has-text-centered">
-              <h3 class="title is-4">Share This Newsletter</h3>
+              <h3 class="title is-4 has-text-black">Share This Newsletter</h3>
               <div class="buttons is-centered">
                 <button class="button is-primary">
                   <span class="icon">
