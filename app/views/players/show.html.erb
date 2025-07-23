@@ -1,11 +1,12 @@
 <!-- Player Header -->
-<section class="hero is-warning is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered has-text-white">
+      <h1 class="title is-1 has-text-centered has-text-black">
         🏃 <%= @player.name %>
       </h1>
-      <h2 class="subtitle has-text-centered has-text-white">
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
         <%= @player.position %> • <%= @player.team.name %>
       </h2>
     </div>
@@ -22,7 +23,7 @@
             <div class="columns">
               <div class="column is-6">
                 <div class="content has-text-black">
-                  <h3 class="title is-4">Player Information</h3>
+                  <h3 class="title is-4 has-text-black">Player Information</h3>
                   <p><strong>Name:</strong> <%= @player.name %></p>
                   <p><strong>Position:</strong> 
                     <span class="tag is-info"><%= @player.position %></span>
@@ -39,7 +40,7 @@
               
               <div class="column is-6">
                 <div class="content has-text-black">
-                  <h3 class="title is-4">Team Information</h3>
+                  <h3 class="title is-4 has-text-black">Team Information</h3>
                   <p><strong>Team Name:</strong> <%= @player.team.name %></p>
                   <p><strong>Owner:</strong> <%= @player.team.owner %></p>
                   <p><strong>Record:</strong> <%= @player.team.wins %>-<%= @player.team.losses %><%= @player.team.ties > 0 ? "-#{@player.team.ties}" : "" %></p>
