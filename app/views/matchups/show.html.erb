@@ -1,11 +1,12 @@
 <!-- Matchup Header -->
-<section class="hero is-success is-bold">
+<section class="hero is-bold">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-1 has-text-centered has-text-white">
+      <h1 class="title is-1 has-text-centered has-text-black">
         ⚔️ Week <%= @matchup.week %>, <%= @matchup.year %>
       </h1>
-      <h2 class="subtitle has-text-centered has-text-white">
+      <br>
+      <h2 class="subtitle has-text-centered has-text-black">
         <%= @matchup.home_team.name %> vs <%= @matchup.away_team.name %>
       </h2>
     </div>
@@ -108,10 +109,10 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title has-text-black">
-              <%= @matchup.home_team.name %> Season Stats
+              <%= @matchup.home_team.name %> - Season Stats
             </p>
           </header>
-          <div class="card-content has-text-black">
+          <div class="card-content has-text-centered has-text-black">
             <div class="content">
               <p><strong>Record:</strong> <%= @matchup.home_team.wins %>-<%= @matchup.home_team.losses %><%= @matchup.home_team.ties > 0 ? "-#{@matchup.home_team.ties}" : "" %></p>
               <p><strong>Win %:</strong> <%= number_to_percentage(@matchup.home_team.win_percentage, precision: 1) %></p>
@@ -126,10 +127,10 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title has-text-black">
-              <%= @matchup.away_team.name %> Season Stats
+              <%= @matchup.away_team.name %> - Season Stats
             </p>
           </header>
-          <div class="card-content has-text-black">
+          <div class="card-content has-text-centered has-text-black">
             <div class="content">
               <p><strong>Record:</strong> <%= @matchup.away_team.wins %>-<%= @matchup.away_team.losses %><%= @matchup.away_team.ties > 0 ? "-#{@matchup.away_team.ties}" : "" %></p>
               <p><strong>Win %:</strong> <%= number_to_percentage(@matchup.away_team.win_percentage, precision: 1) %></p>
