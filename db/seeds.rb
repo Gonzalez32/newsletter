@@ -28,38 +28,8 @@ teams.each do |team_data|
   Team.create!(team_data)
 end
 
-# Create Weekly Newsletters
-puts "Creating newsletters..."
-newsletters = [
-  {
-    title: "Welcome to the 2024 Fantasy Football Season! 🏈",
-    content: "Welcome to our fantasy football league! The season is about to begin and all 14 teams are ready to battle it out for the championship. Juan Jr's Unlucky Carrot Team 🥕 is looking strong, but Lalo's Taqueria chorizon 🌮 has been making some bold predictions.\n\nThis is a fresh start for everyone - all teams are 0-0 and ready to prove themselves. The draft is complete and the rosters are set. It's anyone's game!\n\nQuote of the Week: 'I'm not saying I'm the best fantasy football player, but I'm definitely in the top 10... of this league.' - Christopher F, setting the bar high early.\n\nTrash Talk Corner:\n- Juan Jr to Lalo: 'Your team is like a broken clock - right twice a day.'\n- Lalo to Juan Jr: 'At least my clock works more than your running backs.'\n\nLooking ahead to Week 1, we have some epic matchups that will set the tone for the entire season. Good luck to all managers!",
-    published_at: 1.week.ago,
-    week: 1,
-    year: 2024,
-    featured: true
-  },
-  {
-    title: "Pre-Season Power Rankings 📊",
-    content: "With the season about to start, let's take a look at our pre-season power rankings based on draft performance and team composition.\n\nTop Contenders:\n1. Juan Jr's Unlucky Carrot Team 🥕 - Strong RB corps and solid QB play\n2. Lalo's Taqueria chorizon 🌮 - Explosive WR group that could dominate\n3. Christopher F's Locked In Christopher F - Balanced roster with depth\n\nDark Horses:\n- Hector's I am Vengeance - If the stars align, this team could surprise\n- Maral's Climb Up Maral - Rookie manager with potential\n\nTeams to Watch:\n- Toy's Slippery Toy - Could be slippery in a good way or bad way\n- Patrick Janak's Mic'd Up Patrick Janak - Will he live up to the name?\n\nRemember, these rankings mean nothing once the games start. Anything can happen in fantasy football!",
-    published_at: 2.weeks.ago,
-    week: 0,
-    year: 2024,
-    featured: false
-  },
-  {
-    title: "Draft Day Recap 🎯",
-    content: "The draft is complete and all 14 teams have their rosters set! What a draft it was - full of surprises, reaches, and steals.\n\nDraft Highlights:\n- Juan Jr went RB heavy early, building a strong foundation\n- Lalo's aggressive WR strategy could pay off big time\n- Christopher F played it safe with a balanced approach\n- Hector's 'I am Vengeance' strategy remains mysterious\n\nBiggest Reaches:\n- Toy's Slippery Toy - Some questionable picks that could haunt\n- Patrick Janak's Mic'd Up strategy - Will the mic be on or off?\n\nSteals of the Draft:\n- Maral's Climb Up Maral - Some late round gems\n- Julian's Los Mapaches - Quiet but effective draft\n\nNow it's time to see how these draft strategies play out on the field. The season starts soon and the trash talk is already heating up!",
-    published_at: 3.weeks.ago,
-    week: 0,
-    year: 2024,
-    featured: false
-  }
-]
-
-newsletters.each do |newsletter_data|
-  WeeklyNewsletter.create!(newsletter_data)
-end
+# No newsletters created yet - season hasn't started
+puts "No newsletters created yet - season starts soon!"
 
 # No matchups yet - season hasn't started
 puts "No matchups created yet - season starts soon!"
