@@ -13,8 +13,48 @@
   </div>
 </section>
 
-<!-- Standings Table -->
-<section class="section has-background-dark">
+<!-- Mobile Standings Table (visible on mobile/tablet) -->
+<section class="section has-background-dark is-hidden-desktop">
+  <div class="container">
+    <div class="table-container">
+      <table class="table is-bordered is-fullwidth is-striped is-hoverable">
+        <thead>
+          <tr>
+            <th class="has-text-black">Rank</th>
+            <th class="has-text-black">Team</th>
+            <th class="has-text-black">Owner</th>
+            <th class="has-text-black">W</th>
+            <th class="has-text-black">L</th>
+            <th class="has-text-black">T</th>
+            <th class="has-text-black">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teams.each_with_index do |team, index| %>
+            <tr class="<%= index < 6 ? 'has-background-success-light' : 'has-background-info-light' %>">
+              <td>
+                <span class="tag <%= index < 6 ? 'is-success' : 'is-info' %>">#<%= index + 1 %></span>
+              </td>
+              <td>
+                <strong class="has-text-black"><%= team.name %></strong>
+              </td>
+              <td class="has-text-black"><%= team.owner %></td>
+              <td class="has-text-black"><%= team.wins %></td>
+              <td class="has-text-black"><%= team.losses %></td>
+              <td class="has-text-black"><%= team.ties %></td>
+              <td>
+                <a href="<%= team_path(team) %>" class="button is-small is-primary">View</a>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Desktop Standings Table (visible only on desktop) -->
+<section class="section has-background-dark is-hidden-mobile is-hidden-tablet">
   <div class="container">
     <div class="table-container">
       <table class="table is-fullwidth is-striped is-hoverable">
@@ -71,7 +111,7 @@
     <h2 class="title is-3 has-text-centered mb-5 has-text-white">👥 All Teams</h2>
     <div class="columns is-multiline">
       <% @teams.each_with_index do |team, index| %>
-        <div class="column is-4">
+        <div class="column is-12-mobile is-6-tablet is-4-desktop">
           <div class="card <%= index < 6 ? 'has-background-warning-light' : '' %>">
             <div class="card-content">
               <div class="media">
@@ -83,8 +123,8 @@
                   </div>
                 </div>
                 <div class="media-content">
-                  <p class="title is-4 has-text-black"><%= team.name %></p>
-                  <p class="subtitle is-6 has-text-black">Owner: <%= team.owner %></p>
+                  <p class="title is-4 has-text-black is-truncated"><%= team.name %></p>
+                  <p class="subtitle is-6 has-text-black is-truncated">Owner: <%= team.owner %></p>
                   <p class="subtitle is-6 has-text-black">
                     Record: <%= team.wins %>-<%= team.losses %><%= team.ties > 0 ? "-#{team.ties}" : "" %>
                   </p>

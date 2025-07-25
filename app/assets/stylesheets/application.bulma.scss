@@ -250,3 +250,73 @@ $input-shadow: none;
 .card.has-background-danger-light {
   background-color: #fef2f2 !important;
 }
+
+// Mobile responsive improvements
+.is-truncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Mobile-specific table improvements
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table {
+    font-size: 0.875rem;
+    
+    th, td {
+      padding: 0.5rem 0.25rem;
+    }
+  }
+  
+  // Improve card spacing on mobile
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  // Better button sizing on mobile
+  .button {
+    min-height: 2.5rem;
+    font-size: 0.875rem;
+  }
+  
+  // Improve text readability on mobile
+  .title {
+    font-size: 1.5rem !important;
+  }
+  
+  .subtitle {
+    font-size: 1rem !important;
+  }
+}
+
+// Tablet improvements
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .table {
+    font-size: 0.9rem;
+  }
+}
+
+// Ensure proper spacing for mobile cards
+.column.is-12-mobile {
+  margin-bottom: 1rem;
+}
+
+// Improve mobile navigation
+@media screen and (max-width: 768px) {
+  .hero-body {
+    padding: 2rem 1rem;
+  }
+  
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .container {
+    padding: 0 0.75rem;
+  }
+}

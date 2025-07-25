@@ -17,7 +17,7 @@
 <section class="section has-background-dark">
   <div class="container">
     <div class="columns is-multiline">
-      <div class="column is-3">
+      <div class="column is-6-mobile is-3-tablet is-3-desktop">
         <div class="card has-background-success-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -28,7 +28,7 @@
         </div>
       </div>
       
-      <div class="column is-3">
+      <div class="column is-6-mobile is-3-tablet is-3-desktop">
         <div class="card has-background-danger-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -39,7 +39,7 @@
         </div>
       </div>
       
-      <div class="column is-3">
+      <div class="column is-6-mobile is-3-tablet is-3-desktop">
         <div class="card has-background-warning-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -50,7 +50,7 @@
         </div>
       </div>
       
-      <div class="column is-3">
+      <div class="column is-6-mobile is-3-tablet is-3-desktop">
         <div class="card has-background-info-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -63,7 +63,7 @@
     </div>
     
     <div class="columns is-multiline mt-4">
-      <div class="column is-6">
+      <div class="column is-12-mobile is-6-tablet is-6-desktop">
         <div class="card has-background-success-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -74,7 +74,7 @@
         </div>
       </div>
       
-      <div class="column is-6">
+      <div class="column is-12-mobile is-6-tablet is-6-desktop">
         <div class="card has-background-danger-light">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -94,15 +94,15 @@
     <h2 class="title is-3 has-text-centered mb-5 has-text-white">🏃 Team Roster</h2>
     <div class="columns is-multiline">
       <% @players.each do |player| %>
-        <div class="column is-4">
+        <div class="column is-12-mobile is-6-tablet is-4-desktop">
           <div class="card">
             <div class="card-content">
               <div class="content has-text-centered has-text-black">
-                <p class="title is-5"><%= player.name %></p>
+                <p class="title is-5 is-truncated"><%= player.name %></p>
                 <p class="subtitle is-6">
                   <span class="tag is-info"><%= player.position %></span>
                 </p>
-                <p class="subtitle is-6">
+                <p class="subtitle is-6 is-truncated">
                   Yahoo ID: <%= player.yahoo_player_id %>
                 </p>
               </div>
@@ -132,17 +132,17 @@
     <h2 class="title is-3 has-text-centered mb-5 has-text-white">⚔️ Recent Matchups</h2>
     <div class="columns is-multiline">
       <% @recent_matchups.each do |matchup| %>
-        <div class="column is-6">
+        <div class="column is-12-mobile is-6-tablet is-6-desktop">
           <div class="card">
             <header class="card-header">
-              <p class="card-header-title has-text-black">
+              <p class="card-header-title has-text-black is-size-6">
                 Week <%= matchup.week %>, <%= matchup.year %>
               </p>
               <p class="card-header-icon has-text-black">
                 <% if matchup.winner %>
-                  <span class="tag is-success">🏆 Winner: <%= matchup.winner.name %></span>
+                  <span class="tag is-success is-small">🏆 Winner: <%= matchup.winner.name %></span>
                 <% else %>
-                  <span class="tag is-warning">Pending</span>
+                  <span class="tag is-warning is-small">Pending</span>
                 <% end %>
               </p>
             </header>
@@ -150,11 +150,11 @@
               <div class="columns is-mobile">
                 <div class="column is-5">
                   <div class="content has-text-centered has-text-black">
-                    <p class="title is-5 <%= matchup.home_team == @team ? 'has-text-primary' : '' %>">
+                    <p class="title is-6 is-truncated <%= matchup.home_team == @team ? 'has-text-primary' : '' %>">
                       <%= matchup.home_team.name %>
                     </p>
-                    <p class="subtitle is-6"><%= matchup.home_team.owner %></p>
-                    <p class="title is-4 has-text-primary"><%= number_with_precision(matchup.home_score, precision: 1) %></p>
+                    <p class="subtitle is-7 is-truncated"><%= matchup.home_team.owner %></p>
+                    <p class="title is-5 has-text-primary"><%= number_with_precision(matchup.home_score, precision: 1) %></p>
                   </div>
                 </div>
                 <div class="column is-2">
@@ -164,11 +164,11 @@
                 </div>
                 <div class="column is-5">
                   <div class="content has-text-centered has-text-black">
-                    <p class="title is-5 <%= matchup.away_team == @team ? 'has-text-primary' : '' %>">
+                    <p class="title is-6 is-truncated <%= matchup.away_team == @team ? 'has-text-primary' : '' %>">
                       <%= matchup.away_team.name %>
                     </p>
-                    <p class="subtitle is-6"><%= matchup.away_team.owner %></p>
-                    <p class="title is-4 has-text-info"><%= number_with_precision(matchup.away_score, precision: 1) %></p>
+                    <p class="subtitle is-7 is-truncated"><%= matchup.away_team.owner %></p>
+                    <p class="title is-5 has-text-info"><%= number_with_precision(matchup.away_score, precision: 1) %></p>
                   </div>
                 </div>
               </div>
