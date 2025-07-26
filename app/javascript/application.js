@@ -33,3 +33,36 @@ document.addEventListener('turbo:load', () => {
     });
   });
 });
+
+// Newsletter counter - calculates time since July 26th, 2025
+document.addEventListener('turbo:load', () => {
+  const updateNewsletterCounter = () => {
+    const startDate = new Date('2025-07-26'); // July 26th, 2025
+    const now = new Date();
+    const diffTime = Math.abs(now - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffYears = Math.floor(diffDays / 365);
+    const remainingDays = diffDays % 365;
+    
+    let timeText = '';
+    if (diffYears > 0) {
+      timeText = `${diffYears} year${diffYears > 1 ? 's' : ''}`;
+      if (remainingDays > 0) {
+        timeText += ` and ${remainingDays} day${remainingDays > 1 ? 's' : ''}`;
+      }
+    } else {
+      timeText = `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+    }
+    
+    const counterElement = document.getElementById('newsletter-days');
+    if (counterElement) {
+      counterElement.textContent = timeText;
+    }
+  };
+
+  // Update counter immediately
+  updateNewsletterCounter();
+  
+  // Update counter every day (86400000 milliseconds = 24 hours)
+  setInterval(updateNewsletterCounter, 86400000);
+});

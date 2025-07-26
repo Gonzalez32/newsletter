@@ -27,8 +27,8 @@
             entertaining commentary on our fantasy football league. 
           </p>
           
-          <div class="notification is-info is-light">
-            <p><strong>Fun Fact:</strong> Our newsletter has been running for over 5 years, 
+          <div class="notification is-info is-light" id="newsletter-counter">
+            <p><strong>Fun Fact:</strong> Our newsletter has been running for <span id="newsletter-days">a few weeks</span>, 
             and we've never missed a week! (Well, almost never...)</p>
           </div>
 
@@ -107,15 +107,48 @@
           <h3 class="title is-3">Meet the Commissioner</h3>
           <div class="card">
             <div class="card-content has-text-black">
-              <div class="media">
-                <div class="media-left">
+              <!-- Desktop Layout: Icon on left, text on right -->
+              <div class="columns is-hidden-mobile">
+                <div class="column is-narrow">
                   <figure class="image is-64x64">
                     <div class="has-background-primary has-text-white has-text-centered" style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
                       🏈
                     </div>
                   </figure>
                 </div>
-                <div class="media-content">
+                <div class="column">
+                  <p class="title is-4">The Commissioner</p>
+                  <p class="subtitle is-6">League Manager & Newsletter Author</p>
+                  <div class="content">
+                    <p>
+                      As the commissioner, I'm responsible for keeping the league running smoothly, 
+                      writing the weekly newsletters, and occasionally making controversial 
+                      decisions that everyone will complain about for weeks.
+                    </p>
+                    <p>
+                      <strong>Fun Fact 2:</strong> I've been playing fantasy football for over 10 years 
+                      and still haven't won a championship. But hey, at least I'm consistent!
+                      <br>
+                      <br>
+                      Thanks for reading!
+                      <br>
+                      <br>
+                      - The Commissioner
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile Layout: Centered vertical stack -->
+              <div class="is-hidden-tablet">
+                <div class="has-text-centered mb-4">
+                  <figure class="image is-64x64 is-inline-block">
+                    <div class="has-background-primary has-text-white has-text-centered" style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                      🏈
+                    </div>
+                  </figure>
+                </div>
+                <div class="has-text-centered">
                   <p class="title is-4">The Commissioner</p>
                   <p class="subtitle is-6">League Manager & Newsletter Author</p>
                   <div class="content">
