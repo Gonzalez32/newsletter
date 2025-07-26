@@ -66,3 +66,16 @@ document.addEventListener('turbo:load', () => {
   // Update counter every day (86400000 milliseconds = 24 hours)
   setInterval(updateNewsletterCounter, 86400000);
 });
+
+// Auto-update footer year
+document.addEventListener('turbo:load', () => {
+  const updateFooterYear = () => {
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  };
+
+  // Update year immediately
+  updateFooterYear();
+});
