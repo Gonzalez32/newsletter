@@ -1,0 +1,133 @@
+---
+layout: default
+title: Teams
+description: View all fantasy football teams, their records, and statistics
+---
+
+<!-- Teams Header -->
+<section class="hero is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        🏆 League Teams
+      </h1>
+      <br>
+      <h2 class="subtitle has-text-centered">
+        Check out all the teams, their records, and statistics
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Teams List -->
+<section class="section has-background-dark">
+  <div class="container">
+    <div id="teams-container">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading teams...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="has-text-centered">
+      <a href="/" class="button is-primary is-large">
+        🏠 Back to Home
+      </a>
+      <a href="/dashboard/" class="button is-info is-large">
+        📊 Dashboard
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/assets/data/teams.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data.teams && data.teams.length > 0) {
+        // Sort teams by wins (descending)
+        const sortedTeams = data.teams.sort((a, b) => b.wins - a.wins);
+        
+        const teamsHtml = sortedTeams.map((team, index) => `
+          <div class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div class="card team-card">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <div class="mb-3">
+                    ${index === 0 ? '<span class="tag is-warning is-medium">🥇 1st</span>' : ''}
+                    ${index === 1 ? '<span class="tag is-light is-medium">🥈 2nd</span>' : ''}
+                    ${index === 2 ? '<span class="tag is-warning is-medium">🥉 3rd</span>' : ''}
+                  </div>
+                  <h3 class="title is-4">${team.name}</h3>
+                  <p class="subtitle is-6">Owner: ${team.owner}</p>
+                  
+                  <!-- Record -->
+                  <div class="tags has-addons is-centered mb-3">
+                    <span class="tag is-success">${team.wins} W</span>
+                    <span class="tag is-danger">${team.losses} L</span>
+                    <span class="tag is-warning">${team.ties} T</span>
+                  </div>
+                  
+                  <!-- Win Percentage -->
+                  <p class="has-text-info mb-3">
+                    <strong>${team.win_percentage}% Win Rate</strong>
+                  </p>
+                  
+                  <!-- Points -->
+                  <div class="columns is-mobile is-centered">
+                    <div class="column is-6">
+                      <p class="has-text-success">
+                        <strong>PF:</strong> ${team.points_for}
+                      </p>
+                    </div>
+                    <div class="column is-6">
+                      <p class="has-text-danger">
+                        <strong>PA:</strong> ${team.points_against}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <a href="/teams/${team.slug}/" class="button is-primary is-fullwidth">
+                    View Team Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        document.getElementById('teams-container').innerHTML = `
+          <div class="columns is-multiline">
+            ${teamsHtml}
+          </div>
+        `;
+      } else {
+        document.getElementById('teams-container').innerHTML = `
+          <div class="has-text-centered">
+            <div class="notification is-info">
+              <p class="title is-4">No teams found</p>
+              <p>Teams will appear here once they're added to the league!</p>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('teams-container').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-danger">
+            <p class="title is-4">Error loading teams</p>
+            <p>Please try refreshing the page.</p>
+          </div>
+        </div>
+      `;
+    });
+});
+</script> 

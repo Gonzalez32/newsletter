@@ -1,0 +1,64 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "The Gridiron Gurus",
+      "slug": "gridiron-gurus",
+      "owner": "John Smith",
+      "wins": 6,
+      "losses": 2,
+      "ties": 0,
+      "points_for": 1250.5,
+      "points_against": 1100.2,
+      "win_percentage": 75.0
+    },
+    {
+      "id": 2,
+      "name": "Touchdown Titans",
+      "slug": "touchdown-titans",
+      "owner": "Mike Johnson",
+      "wins": 5,
+      "losses": 3,
+      "ties": 0,
+      "points_for": 1180.3,
+      "points_against": 1150.8,
+      "win_percentage": 62.5
+    },
+    {
+      "id": 3,
+      "name": "Fantasy Legends",
+      "slug": "fantasy-legends",
+      "owner": "Sarah Wilson",
+      "wins": 4,
+      "losses": 4,
+      "ties": 0,
+      "points_for": 1120.7,
+      "points_against": 1120.7,
+      "win_percentage": 50.0
+    },
+    {
+      "id": 4,
+      "name": "End Zone Warriors",
+      "slug": "end-zone-warriors",
+      "owner": "David Brown",
+      "wins": 3,
+      "losses": 5,
+      "ties": 0,
+      "points_for": 1050.9,
+      "points_against": 1180.4,
+      "win_percentage": 37.5
+    },
+    {
+      "id": 5,
+      "name": "Hail Mary Heroes",
+      "slug": "hail-mary-heroes",
+      "owner": "Lisa Davis",
+      "wins": 2,
+      "losses": 6,
+      "ties": 0,
+      "points_for": 980.2,
+      "points_against": 1250.1,
+      "win_percentage": 25.0
+    }
+  ]
+} 

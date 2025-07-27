@@ -1,0 +1,268 @@
+---
+---
+
+// Import Bulma
+@import "bulma/bulma";
+
+// Custom variables
+:root {
+  --primary-color: #1e40af;
+  --success-color: #059669;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --info-color: #0891b2;
+  --dark-bg: #1f2937;
+  --light-bg: #f9fafb;
+}
+
+// Custom styles
+body {
+  font-family: 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+}
+
+// Hero sections
+.hero.is-bold {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+}
+
+.hero.is-bold .title,
+.hero.is-bold .subtitle {
+  color: white !important;
+}
+
+// Cards
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+// Stats cards
+.stats-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.stats-card.wins {
+  background-color: #dcfce7;
+  color: var(--success-color);
+}
+
+.stats-card.losses {
+  background-color: #fee2e2;
+  color: var(--danger-color);
+}
+
+.stats-card.ties {
+  background-color: #fef3c7;
+  color: var(--warning-color);
+}
+
+.stats-card.percentage {
+  background-color: #e0f2fe;
+  color: var(--info-color);
+}
+
+// Team cards
+.team-card {
+  border-left: 4px solid var(--primary-color);
+}
+
+.team-card:hover {
+  border-left-color: var(--info-color);
+}
+
+// Player cards
+.player-card {
+  text-align: center;
+}
+
+.player-card .position-tag {
+  margin: 0.5rem 0;
+}
+
+// Matchup cards
+.matchup-card {
+  border: 1px solid #e5e7eb;
+}
+
+.matchup-card .vs {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+// Navigation
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+// Buttons
+.button.is-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.button.is-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.button.is-success {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.button.is-danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.button.is-warning {
+  background-color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+.button.is-info {
+  background-color: var(--info-color);
+  border-color: var(--info-color);
+}
+
+// Tags
+.tag.is-success {
+  background-color: var(--success-color);
+}
+
+.tag.is-danger {
+  background-color: var(--danger-color);
+}
+
+.tag.is-warning {
+  background-color: var(--warning-color);
+}
+
+.tag.is-info {
+  background-color: var(--info-color);
+}
+
+// Sections
+.section.has-background-dark {
+  background-color: var(--dark-bg) !important;
+}
+
+.section.has-background-light {
+  background-color: var(--light-bg) !important;
+}
+
+// Responsive design
+@media screen and (max-width: 768px) {
+  .hero .title {
+    font-size: 2rem !important;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.1rem !important;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+// Loading states
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// Utility classes
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.is-truncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Footer
+.footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+// Page specific styles
+.home-page .hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-page .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.teams-page .team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.players-page .player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.matchups-page .matchup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+// Print styles
+@media print {
+  .navbar,
+  .footer,
+  .button {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+} 

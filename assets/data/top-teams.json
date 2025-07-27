@@ -1,0 +1,34 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "The Gridiron Gurus",
+      "slug": "gridiron-gurus",
+      "owner": "John Smith",
+      "wins": 6,
+      "losses": 2,
+      "ties": 0,
+      "win_percentage": 75.0
+    },
+    {
+      "id": 2,
+      "name": "Touchdown Titans",
+      "slug": "touchdown-titans",
+      "owner": "Mike Johnson",
+      "wins": 5,
+      "losses": 3,
+      "ties": 0,
+      "win_percentage": 62.5
+    },
+    {
+      "id": 3,
+      "name": "Fantasy Legends",
+      "slug": "fantasy-legends",
+      "owner": "Sarah Wilson",
+      "wins": 4,
+      "losses": 4,
+      "ties": 0,
+      "win_percentage": 50.0
+    }
+  ]
+} 

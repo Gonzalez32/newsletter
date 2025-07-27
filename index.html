@@ -1,0 +1,266 @@
+---
+layout: default
+title: Home
+description: Welcome to the Fantasy Football Newsletter - Your league's home for newsletters, standings, and stats
+---
+
+<!-- Hero Section -->
+<section class="hero is-bold home-page">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        🏈 Fantasy Football Newsletter
+      </h1>
+      <br>
+      <h2 class="subtitle has-text-centered">
+        Your league's home for newsletters, standings, and player statistics
+      </h2>
+      <div class="has-text-centered mt-5">
+        <a href="/newsletters/" class="button is-primary is-large mr-3">
+          📰 Read Newsletters
+        </a>
+        <a href="/teams/" class="button is-info is-large mr-3">
+          🏆 View Teams
+        </a>
+        <a href="/dashboard/" class="button is-success is-large">
+          📊 Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">📊 League Overview</h2>
+    <div class="columns is-multiline">
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-primary-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Newsletters</p>
+              <p class="title is-2 has-text-primary" id="total-newsletters">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Teams</p>
+              <p class="title is-2 has-text-success" id="total-teams">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-info-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Players</p>
+              <p class="title is-2 has-text-info" id="total-players">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-warning-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Matchups</p>
+              <p class="title is-2 has-text-warning" id="total-matchups">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Newsletter -->
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">📰 Latest Newsletter</h2>
+    <div id="latest-newsletter">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading latest newsletter...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Top Teams -->
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">🏆 Top Teams</h2>
+    <div id="top-teams">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading top teams...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Links -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">🔗 Quick Links</h2>
+    <div class="columns is-multiline">
+      <div class="column is-4-desktop is-6-tablet is-12-mobile">
+        <div class="card team-card">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <h3 class="title is-4">📰 Newsletters</h3>
+              <p>Read all the hilarious weekly newsletters from your league</p>
+              <a href="/newsletters/" class="button is-primary">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-4-desktop is-6-tablet is-12-mobile">
+        <div class="card team-card">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <h3 class="title is-4">🏆 Teams</h3>
+              <p>Check out all the teams, their records, and statistics</p>
+              <a href="/teams/" class="button is-info">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-4-desktop is-6-tablet is-12-mobile">
+        <div class="card team-card">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <h3 class="title is-4">⚔️ Matchups</h3>
+              <p>See all the epic battles and game results</p>
+              <a href="/matchups/" class="button is-success">View All</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Load data from JSON files
+document.addEventListener('DOMContentLoaded', function() {
+  // Load stats
+  fetch('/assets/data/stats.json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('total-newsletters').textContent = data.total_newsletters || 0;
+      document.getElementById('total-teams').textContent = data.total_teams || 0;
+      document.getElementById('total-players').textContent = data.total_players || 0;
+      document.getElementById('total-matchups').textContent = data.total_matchups || 0;
+    })
+    .catch(error => {
+      console.log('Stats not available yet');
+    });
+
+  // Load latest newsletter
+  fetch('/assets/data/latest-newsletter.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data.newsletter) {
+        document.getElementById('latest-newsletter').innerHTML = `
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <h3 class="title is-4">${data.newsletter.title}</h3>
+                <p class="subtitle is-6">Published: ${data.newsletter.published_at}</p>
+                <div class="content">
+                  ${data.newsletter.content.substring(0, 300)}...
+                </div>
+                <a href="/newsletters/${data.newsletter.slug}/" class="button is-primary">Read Full Newsletter</a>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        document.getElementById('latest-newsletter').innerHTML = `
+          <div class="has-text-centered">
+            <div class="notification is-info">
+              <p class="title is-4">No newsletters yet</p>
+              <p>Check back soon for the latest league updates!</p>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('latest-newsletter').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-info">
+            <p class="title is-4">No newsletters yet</p>
+            <p>Check back soon for the latest league updates!</p>
+          </div>
+        </div>
+      `;
+    });
+
+  // Load top teams
+  fetch('/assets/data/top-teams.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data.teams && data.teams.length > 0) {
+        const teamsHtml = data.teams.map(team => `
+          <div class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div class="card team-card">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <h4 class="title is-5">${team.name}</h4>
+                  <p class="subtitle is-6">${team.owner}</p>
+                  <div class="tags has-addons is-centered">
+                    <span class="tag is-success">${team.wins} W</span>
+                    <span class="tag is-danger">${team.losses} L</span>
+                    <span class="tag is-warning">${team.ties} T</span>
+                  </div>
+                  <p class="has-text-info">${team.win_percentage}% Win Rate</p>
+                  <a href="/teams/${team.slug}/" class="button is-small is-primary">View Team</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        document.getElementById('top-teams').innerHTML = `
+          <div class="columns is-multiline">
+            ${teamsHtml}
+          </div>
+        `;
+      } else {
+        document.getElementById('top-teams').innerHTML = `
+          <div class="has-text-centered">
+            <div class="notification is-info">
+              <p class="title is-4">No teams yet</p>
+              <p>Teams will appear here once they're added!</p>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('top-teams').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-info">
+            <p class="title is-4">No teams yet</p>
+            <p>Teams will appear here once they're added!</p>
+          </div>
+        </div>
+      `;
+    });
+});
+</script> 

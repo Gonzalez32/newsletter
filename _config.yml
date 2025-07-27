@@ -1,0 +1,112 @@
+# Jekyll Configuration for Fantasy Football Newsletter
+title: Fantasy Football Newsletter
+description: A beautiful website for managing and displaying fantasy football league newsletters, standings, matchups, and player statistics
+url: "https://fantasyfootballnewsletter.net"
+baseurl: "https://fantasyfootballnewsletter.net"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Collections
+collections:
+  newsletters:
+    output: true
+    permalink: /newsletters/:title/
+  teams:
+    output: true
+    permalink: /teams/:title/
+  players:
+    output: true
+    permalink: /players/:title/
+  matchups:
+    output: true
+    permalink: /matchups/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "newsletters"
+    values:
+      layout: "newsletter"
+  - scope:
+      path: ""
+      type: "teams"
+    values:
+      layout: "team"
+  - scope:
+      path: ""
+      type: "players"
+    values:
+      layout: "player"
+  - scope:
+      path: ""
+      type: "matchups"
+    values:
+      layout: "matchup"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Include files
+include:
+  - _pages
+
+# Site settings
+author:
+  name: "Fantasy Football League"
+  email: "admin@fantasyfootballnewsletter.net"
+
+# Social media
+social:
+  name: "Fantasy Football Newsletter"
+  links:
+    - https://github.com/yourusername/newsletter
+
+# Theme settings
+theme_settings:
+  # Meta
+  title: "Fantasy Football Newsletter"
+  tagline: "Your league's home for newsletters, standings, and stats"
+  description: "A beautiful website for managing and displaying fantasy football league newsletters, standings, matchups, and player statistics"
+  
+  # Header and footer text
+  header_text: "Fantasy Football Newsletter"
+  footer_text: "Built with ❤️ and 🏈 for fantasy football enthusiasts everywhere!"
+  
+  # Icons
+  favicon: "/assets/images/favicon.ico"
+  
+  # Sidebar
+  sidebar:
+    enabled: true
+    nav:
+      - title: "🏠 Home"
+        url: /
+      - title: "📰 Newsletters"
+        url: /newsletters/
+      - title: "🏆 Teams"
+        url: /teams/
+      - title: "🏃 Players"
+        url: /players/
+      - title: "⚔️ Matchups"
+        url: /matchups/
+      - title: "📊 Dashboard"
+        url: /dashboard/
+      - title: "ℹ️ About"
+        url: /about/ 
