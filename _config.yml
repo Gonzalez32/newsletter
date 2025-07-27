@@ -2,7 +2,7 @@
 title: Fantasy Football Newsletter
 description: A beautiful website for managing and displaying fantasy football league newsletters, standings, matchups, and player statistics
 url: "https://fantasyfootballnewsletter.net"
-baseurl: "https://fantasyfootballnewsletter.net"
+baseurl: ""
 
 # Build settings
 markdown: kramdown
