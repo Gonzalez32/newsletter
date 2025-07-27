@@ -1,0 +1,262 @@
+---
+layout: default
+title: Dashboard
+description: Comprehensive league overview and quick stats
+---
+
+<!-- Dashboard Header -->
+<section class="hero is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-centered">
+        📊 League Dashboard
+      </h1>
+      <br>
+      <h2 class="subtitle has-text-centered">
+        Comprehensive league overview and quick stats
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- League Stats -->
+<section class="section has-background-light">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5">📈 League Statistics</h2>
+    <div class="columns is-multiline">
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-primary-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Newsletters</p>
+              <p class="title is-2 has-text-primary" id="total-newsletters">12</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-success-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Teams</p>
+              <p class="title is-2 has-text-success" id="total-teams">10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-info-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Players</p>
+              <p class="title is-2 has-text-info" id="total-players">150</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-3-desktop is-6-tablet is-12-mobile">
+        <div class="card has-background-warning-light">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <p class="heading">Total Matchups</p>
+              <p class="title is-2 has-text-warning" id="total-matchups">45</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Standings -->
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">🏆 Current Standings</h2>
+    <div id="standings-container">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading standings...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Matchups -->
+<section class="section has-background-dark">
+  <div class="container">
+    <h2 class="title is-3 has-text-centered mb-5 has-text-white">⚔️ Recent Matchups</h2>
+    <div id="recent-matchups-container">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading recent matchups...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="section has-background-light">
+  <div class="container">
+    <div class="has-text-centered">
+      <a href="/" class="button is-primary is-large">
+        🏠 Back to Home
+      </a>
+      <a href="/teams/" class="button is-info is-large">
+        🏆 View All Teams
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Load standings
+  fetch('/assets/data/teams.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data.teams && data.teams.length > 0) {
+        // Sort teams by wins (descending)
+        const sortedTeams = data.teams.sort((a, b) => b.wins - a.wins);
+        
+        const standingsHtml = sortedTeams.map((team, index) => `
+          <div class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div class="card team-card">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <div class="mb-3">
+                    ${index === 0 ? '<span class="tag is-warning is-medium">🥇 1st</span>' : ''}
+                    ${index === 1 ? '<span class="tag is-light is-medium">🥈 2nd</span>' : ''}
+                    ${index === 2 ? '<span class="tag is-warning is-medium">🥉 3rd</span>' : ''}
+                  </div>
+                  <h3 class="title is-4">${team.name}</h3>
+                  <p class="subtitle is-6">${team.owner}</p>
+                  
+                  <!-- Record -->
+                  <div class="tags has-addons is-centered mb-3">
+                    <span class="tag is-success">${team.wins} W</span>
+                    <span class="tag is-danger">${team.losses} L</span>
+                    <span class="tag is-warning">${team.ties} T</span>
+                  </div>
+                  
+                  <!-- Win Percentage -->
+                  <p class="has-text-info mb-3">
+                    <strong>${team.win_percentage}% Win Rate</strong>
+                  </p>
+                  
+                  <!-- Points -->
+                  <div class="columns is-mobile is-centered">
+                    <div class="column is-6">
+                      <p class="has-text-success">
+                        <strong>PF:</strong> ${team.points_for}
+                      </p>
+                    </div>
+                    <div class="column is-6">
+                      <p class="has-text-danger">
+                        <strong>PA:</strong> ${team.points_against}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <a href="/teams/${team.slug}/" class="button is-primary is-small">View Team</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        document.getElementById('standings-container').innerHTML = `
+          <div class="columns is-multiline">
+            ${standingsHtml}
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('standings-container').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-info">
+            <p class="title is-4">No teams found</p>
+            <p>Teams will appear here once they're added!</p>
+          </div>
+        </div>
+      `;
+    });
+
+  // Sample recent matchups
+  const sampleMatchups = [
+    {
+      id: 1,
+      week: 8,
+      year: 2024,
+      home_team: "The Gridiron Gurus",
+      away_team: "Touchdown Titans",
+      home_score: 145.2,
+      away_score: 138.7,
+      winner: "The Gridiron Gurus"
+    },
+    {
+      id: 2,
+      week: 8,
+      year: 2024,
+      home_team: "Fantasy Legends",
+      away_team: "End Zone Warriors",
+      home_score: 125.8,
+      away_score: 112.3,
+      winner: "Fantasy Legends"
+    },
+    {
+      id: 3,
+      week: 7,
+      year: 2024,
+      home_team: "Hail Mary Heroes",
+      away_team: "The Gridiron Gurus",
+      home_score: 98.5,
+      away_score: 156.2,
+      winner: "The Gridiron Gurus"
+    }
+  ];
+
+  const matchupsHtml = sampleMatchups.map(matchup => `
+    <div class="column is-12-mobile is-6-tablet is-4-desktop">
+      <div class="card matchup-card">
+        <div class="card-content">
+          <div class="content has-text-centered">
+            <h4 class="title is-5">Week ${matchup.week}, ${matchup.year}</h4>
+            
+            <div class="columns is-mobile">
+              <div class="column is-5">
+                <p class="title is-6">${matchup.home_team}</p>
+                <p class="title is-4 has-text-primary">${matchup.home_score}</p>
+              </div>
+              <div class="column is-2">
+                <p class="title is-6">VS</p>
+              </div>
+              <div class="column is-5">
+                <p class="title is-6">${matchup.away_team}</p>
+                <p class="title is-4 has-text-info">${matchup.away_score}</p>
+              </div>
+            </div>
+            
+            <div class="mt-3">
+              <span class="tag is-success is-medium">
+                🏆 Winner: ${matchup.winner}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('recent-matchups-container').innerHTML = `
+    <div class="columns is-multiline">
+      ${matchupsHtml}
+    </div>
+  `;
+});
+</script> 
