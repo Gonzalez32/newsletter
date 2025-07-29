@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/images/skull_carrot.png' | relative_url }}">
   
   <!-- SEO -->
   {% seo %}
@@ -33,7 +33,7 @@
   <!-- Navigation -->
   <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" href="{{ '/' | relative_url }}">
         <strong>🏈 Fantasy Football Newsletter</strong>
       </a>
 
@@ -46,25 +46,25 @@
 
     <div id="navbarBasic" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="/">
+        <a class="navbar-item" href="{{ '/' | relative_url }}">
           🏠 Home
         </a>
-        <a class="navbar-item" href="/newsletters/">
+        <a class="navbar-item" href="{{ '/newsletters/' | relative_url }}">
           📰 Newsletters
         </a>
-        <a class="navbar-item" href="/teams/">
+        <a class="navbar-item" href="{{ '/teams/' | relative_url }}">
           🏆 Teams
         </a>
-        <a class="navbar-item" href="/players/">
+        <a class="navbar-item" href="{{ '/players/' | relative_url }}">
           🏃 Players
         </a>
-        <a class="navbar-item" href="/matchups/">
+        <a class="navbar-item" href="{{ '/matchups/' | relative_url }}">
           ⚔️ Matchups
         </a>
-        <a class="navbar-item" href="/dashboard/">
+        <a class="navbar-item" href="{{ '/dashboard/' | relative_url }}">
           📊 Dashboard
         </a>
-        <a class="navbar-item" href="/about/">
+        <a class="navbar-item" href="{{ '/about/' | relative_url }}">
           ℹ️ About
         </a>
       </div>
@@ -81,10 +81,18 @@
     <div class="content has-text-centered has-text-white">
       <p>
         <strong class="has-text-white">Fantasy Football Newsletter</strong> by 
-        <a href="https://fantasyfootballnewsletter.net" class="has-text-info">Your League</a>.
+        <a href="{{ site.url }}" class="has-text-info">Your League</a>.
       </p>
       <p>
         Built with ❤️ and 🏈 for fantasy football enthusiasts everywhere!
+      </p>
+      <p>
+        Fantasy Football Newsletter | All Rights Reserved Copyright©<span id="current-year">2025</span>
+        
+        <script>
+          // Auto-update the current year
+          document.getElementById('current-year').textContent = new Date().getFullYear();
+          </script>
       </p>
       <p class="is-size-7">
         Last updated: {{ site.time | date: "%B %d, %Y" }}

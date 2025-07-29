@@ -2,33 +2,63 @@
   "teams": [
     {
       "id": 1,
-      "name": "The Gridiron Gurus",
-      "slug": "gridiron-gurus",
-      "owner": "John Smith",
-      "wins": 6,
-      "losses": 2,
+      "name": "Unlucky Carrot Team 🥕",
+      "slug": "unlucky-carrot-team",
+      "owner": "Juan Jr (League Commissioner)",
+      "wins": 0,
+      "losses": 0,
       "ties": 0,
-      "win_percentage": 75.0
+      "points_for": 0,
+      "points_against": 0,
+      "win_percentage": 0.0
     },
     {
       "id": 2,
-      "name": "Touchdown Titans",
-      "slug": "touchdown-titans",
-      "owner": "Mike Johnson",
-      "wins": 5,
-      "losses": 3,
+      "name": "Taqueria chorizon 🌮",
+      "slug": "taqueria-chorizon",
+      "owner": "Lalo",
+      "wins": 0,
+      "losses": 0,
       "ties": 0,
-      "win_percentage": 62.5
+      "points_for": 0,
+      "points_against": 0,
+      "win_percentage": 0.0
     },
     {
       "id": 3,
-      "name": "Fantasy Legends",
-      "slug": "fantasy-legends",
-      "owner": "Sarah Wilson",
-      "wins": 4,
-      "losses": 4,
+      "name": "Big D(rive) Energy",
+      "slug": "big-drive-energy",
+      "owner": "Haley",
+      "wins": 0,
+      "losses": 0,
       "ties": 0,
-      "win_percentage": 50.0
+      "points_for": 0,
+      "points_against": 0,
+      "win_percentage": 0.0
+    },
+    {
+      "id": 4,
+      "name": "Climb Up Maral",
+      "slug": "climb-up-maral",
+      "owner": "Maral",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "points_for": 0,
+      "points_against": 0,
+      "win_percentage": 0.0
+    },
+    {
+      "id": 5,
+      "name": "Locked In Christopher F",
+      "slug": "locked-in-christopher-f",
+      "owner": "Christopher F",
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "points_for": 0,
+      "points_against": 0,
+      "win_percentage": 0.0
     }
   ]
 } 

@@ -36,10 +36,10 @@ description: View all fantasy football teams, their records, and statistics
 <section class="section has-background-light">
   <div class="container">
     <div class="has-text-centered">
-      <a href="/" class="button is-primary is-large">
+              <a href="{{ '/' | relative_url }}" class="button is-primary is-large">
         🏠 Back to Home
       </a>
-      <a href="/dashboard/" class="button is-info is-large">
+              <a href="{{ '/dashboard/' | relative_url }}" class="button is-info is-large">
         📊 Dashboard
       </a>
     </div>
@@ -48,64 +48,59 @@ description: View all fantasy football teams, their records, and statistics
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('/assets/data/teams.json')
+  fetch('{{ "/assets/data/teams.json" | relative_url }}')
     .then(response => response.json())
     .then(data => {
       if (data.teams && data.teams.length > 0) {
         // Sort teams by wins (descending)
         const sortedTeams = data.teams.sort((a, b) => b.wins - a.wins);
         
-        const teamsHtml = sortedTeams.map((team, index) => `
-          <div class="column is-12-mobile is-6-tablet is-4-desktop">
-            <div class="card team-card">
-              <div class="card-content">
-                <div class="content has-text-centered">
-                  <div class="mb-3">
-                    ${index === 0 ? '<span class="tag is-warning is-medium">🥇 1st</span>' : ''}
-                    ${index === 1 ? '<span class="tag is-light is-medium">🥈 2nd</span>' : ''}
-                    ${index === 2 ? '<span class="tag is-warning is-medium">🥉 3rd</span>' : ''}
-                  </div>
-                  <h3 class="title is-4">${team.name}</h3>
-                  <p class="subtitle is-6">Owner: ${team.owner}</p>
-                  
-                  <!-- Record -->
-                  <div class="tags has-addons is-centered mb-3">
-                    <span class="tag is-success">${team.wins} W</span>
-                    <span class="tag is-danger">${team.losses} L</span>
-                    <span class="tag is-warning">${team.ties} T</span>
-                  </div>
-                  
-                  <!-- Win Percentage -->
-                  <p class="has-text-info mb-3">
-                    <strong>${team.win_percentage}% Win Rate</strong>
-                  </p>
-                  
-                  <!-- Points -->
-                  <div class="columns is-mobile is-centered">
-                    <div class="column is-6">
-                      <p class="has-text-success">
-                        <strong>PF:</strong> ${team.points_for}
-                      </p>
-                    </div>
-                    <div class="column is-6">
-                      <p class="has-text-danger">
-                        <strong>PA:</strong> ${team.points_against}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <a href="/teams/${team.slug}/" class="button is-primary is-fullwidth">
-                    View Team Details
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        `).join('');
+        const teamsHtml = sortedTeams.map((team, index) => {
+          const isTop6 = index < 6;
+          const rowClass = isTop6 ? 'has-background-success-light' : '';
+          const rankClass = isTop6 ? 'has-text-weight-bold' : '';
+          
+          return `
+            <tr class="${rowClass}">
+              <td class="${rankClass}">${index + 1}</td>
+              <td class="${rankClass}">
+                <strong>${team.name}</strong>
+                <br>
+                <small class="has-text-grey">${team.owner}</small>
+              </td>
+              <td class="has-text-centered">
+                <span class="tag is-success">${team.wins}</span>
+                <span class="tag is-danger">${team.losses}</span>
+                <span class="tag is-warning">${team.ties}</span>
+              </td>
+              <td class="has-text-centered ${rankClass}">${team.win_percentage}%</td>
+              <td class="has-text-centered has-text-success">${team.points_for}</td>
+              <td class="has-text-centered has-text-danger">${team.points_against}</td>
+              <td class="has-text-centered">
+                <a href="${window.location.origin}/teams/${team.slug}/" class="button is-small is-primary">View</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
         
         document.getElementById('teams-container').innerHTML = `
-          <div class="columns is-multiline">
-            ${teamsHtml}
+          <div class="table-container">
+            <table class="table is-fullwidth is-striped is-hoverable">
+              <thead>
+                <tr>
+                  <th class="has-text-centered">Rank</th>
+                  <th>Team</th>
+                  <th class="has-text-centered">Record</th>
+                  <th class="has-text-centered">Win %</th>
+                  <th class="has-text-centered">PF</th>
+                  <th class="has-text-centered">PA</th>
+                  <th class="has-text-centered">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${teamsHtml}
+              </tbody>
+            </table>
           </div>
         `;
       } else {

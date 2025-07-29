@@ -24,6 +24,13 @@ collections:
     output: true
     permalink: /matchups/:title/
 
+# URL rewriting for dynamic team pages
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
 # Defaults
 defaults:
   - scope:

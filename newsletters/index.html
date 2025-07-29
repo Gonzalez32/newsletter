@@ -36,10 +36,10 @@ description: Read all the hilarious weekly newsletters from your fantasy footbal
 <section class="section has-background-light">
   <div class="container">
     <div class="has-text-centered">
-      <a href="/" class="button is-primary is-large">
+              <a href="{{ '/' | relative_url }}" class="button is-primary is-large">
         🏠 Back to Home
       </a>
-      <a href="/dashboard/" class="button is-info is-large">
+              <a href="{{ '/dashboard/' | relative_url }}" class="button is-info is-large">
         📊 Dashboard
       </a>
     </div>
@@ -48,59 +48,56 @@ description: Read all the hilarious weekly newsletters from your fantasy footbal
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // For now, we'll show a sample newsletter since we don't have a newsletters.json file yet
-  const sampleNewsletters = [
-    {
-      id: 1,
-      title: "Week 8: The Plot Thickens!",
-      slug: "week-8-plot-thickens",
-      content: "What a wild week in fantasy football! The Gridiron Gurus continue their dominance, but the Touchdown Titans are hot on their heels. We saw some incredible performances this week, including a record-breaking 45-point game from one of our quarterbacks. The playoff race is heating up, and with only 5 weeks left in the regular season, every game matters more than ever.",
-      published_at: "November 15, 2024",
-      week: 8,
-      year: 2024
-    },
-    {
-      id: 2,
-      title: "Week 7: Upsets Galore!",
-      slug: "week-7-upsets-galore",
-      content: "This week was full of surprises! The underdogs came out swinging, and we saw some major upsets that shook up the standings. The Fantasy Legends pulled off an incredible comeback, while the End Zone Warriors finally got their first win of the season. This is why we love fantasy football - anything can happen!",
-      published_at: "November 8, 2024",
-      week: 7,
-      year: 2024
-    },
-    {
-      id: 3,
-      title: "Week 6: Midseason Madness",
-      slug: "week-6-midseason-madness",
-      content: "We're officially at the halfway point of the season, and the competition is fiercer than ever! The Gridiron Gurus are still leading the pack, but the gap is closing fast. Injuries are starting to take their toll, and waiver wire pickups are becoming crucial. It's time to make those playoff pushes!",
-      published_at: "November 1, 2024",
-      week: 6,
-      year: 2024
-    }
-  ];
-
-  const newslettersHtml = sampleNewsletters.map(newsletter => `
-    <div class="column is-12-mobile is-6-tablet is-4-desktop">
-      <div class="card">
-        <div class="card-content">
-          <div class="content">
-            <h3 class="title is-4">${newsletter.title}</h3>
-            <p class="subtitle is-6">Published: ${newsletter.published_at}</p>
-            <p class="subtitle is-6">Week ${newsletter.week}, ${newsletter.year}</p>
-            <div class="content">
-              ${newsletter.content.substring(0, 200)}...
+  // Load newsletters from JSON file
+  fetch('{{ "/assets/data/newsletters.json" | relative_url }}')
+    .then(response => response.json())
+    .then(data => {
+      if (data.newsletters && data.newsletters.length > 0) {
+        // Multiple newsletters
+        const newslettersHtml = data.newsletters.map(newsletter => `
+          <div class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div class="card">
+              <div class="card-content">
+                <div class="content">
+                  <h3 class="title is-4">${newsletter.title}</h3>
+                  <p class="subtitle is-6">Published: ${newsletter.published_at}</p>
+                  <p class="subtitle is-6">Week ${newsletter.week}, ${newsletter.year}</p>
+                  <div class="content">
+                    ${newsletter.content.substring(0, 200)}...
+                  </div>
+                  <a href="${window.location.origin}/newsletters/${newsletter.slug}/" class="button is-primary">Read Full Newsletter</a>
+                </div>
+              </div>
             </div>
-            <a href="/newsletters/${newsletter.slug}/" class="button is-primary">Read Full Newsletter</a>
+          </div>
+        `).join('');
+        
+        document.getElementById('newsletters-container').innerHTML = `
+          <div class="columns is-multiline">
+            ${newslettersHtml}
+          </div>
+        `;
+      } else {
+        // No newsletters yet
+        document.getElementById('newsletters-container').innerHTML = `
+          <div class="has-text-centered">
+            <div class="notification is-info">
+              <p class="title is-4">No newsletters yet</p>
+              <p>${data.message || 'Check back soon for the latest league updates!'}</p>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('newsletters-container').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-danger">
+            <p class="title is-4">Error loading newsletters</p>
+            <p>Please try refreshing the page.</p>
           </div>
         </div>
-      </div>
-    </div>
-  `).join('');
-
-  document.getElementById('newsletters-container').innerHTML = `
-    <div class="columns is-multiline">
-      ${newslettersHtml}
-    </div>
-  `;
+      `;
+    });
 });
 </script> 

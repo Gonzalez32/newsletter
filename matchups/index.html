@@ -22,11 +22,11 @@ description: View all matchups and game results
 <!-- Matchups List -->
 <section class="section has-background-dark">
   <div class="container">
-    <div class="has-text-centered">
-      <div class="notification is-info">
-        <p class="title is-4">Matchups Section Coming Soon!</p>
-        <p>This section will display all matchups in the league with scores, winners, and game details.</p>
-        <p>Check back soon for updates!</p>
+    <div id="matchups-container">
+      <div class="has-text-centered">
+        <div class="notification is-info">
+          <p class="title is-4">Loading matchups...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -36,12 +36,87 @@ description: View all matchups and game results
 <section class="section has-background-light">
   <div class="container">
     <div class="has-text-centered">
-      <a href="/" class="button is-primary is-large">
+              <a href="{{ '/' | relative_url }}" class="button is-primary is-large">
         🏠 Back to Home
       </a>
-      <a href="/teams/" class="button is-info is-large">
+              <a href="{{ '/teams/' | relative_url }}" class="button is-info is-large">
         🏆 View Teams
       </a>
     </div>
   </div>
-</section> 
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Load matchups from JSON file
+  fetch('{{ "/assets/data/matchups.json" | relative_url }}')
+    .then(response => response.json())
+    .then(data => {
+      if (data.matchups && data.matchups.length > 0) {
+        // Sort matchups by week (descending) and year (descending)
+        const sortedMatchups = data.matchups.sort((a, b) => {
+          if (a.year !== b.year) return b.year - a.year;
+          return b.week - a.week;
+        });
+        
+        const matchupsHtml = sortedMatchups.map(matchup => `
+          <div class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div class="card matchup-card">
+              <div class="card-content">
+                <div class="content has-text-centered">
+                  <h4 class="title is-5">Week ${matchup.week}, ${matchup.year}</h4>
+                  
+                  <div class="columns is-mobile">
+                    <div class="column is-5">
+                      <p class="title is-6">${matchup.home_team}</p>
+                      <p class="title is-4 has-text-primary">${matchup.home_score}</p>
+                    </div>
+                    <div class="column is-2">
+                      <p class="title is-6">VS</p>
+                    </div>
+                    <div class="column is-5">
+                      <p class="title is-6">${matchup.away_team}</p>
+                      <p class="title is-4 has-text-info">${matchup.away_score}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-3">
+                    <span class="tag is-success is-medium">
+                      🏆 Winner: ${matchup.winner}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        document.getElementById('matchups-container').innerHTML = `
+          <div class="columns is-multiline">
+            ${matchupsHtml}
+          </div>
+        `;
+      } else {
+        // No matchups yet
+        document.getElementById('matchups-container').innerHTML = `
+          <div class="has-text-centered">
+            <div class="notification is-info">
+              <p class="title is-4">No matchups yet</p>
+              <p>${data.message || 'Matchups will appear here once the season starts!'}</p>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(error => {
+      document.getElementById('matchups-container').innerHTML = `
+        <div class="has-text-centered">
+          <div class="notification is-danger">
+            <p class="title is-4">Error loading matchups</p>
+            <p>Please try refreshing the page.</p>
+          </div>
+        </div>
+      `;
+    });
+});
+</script> 

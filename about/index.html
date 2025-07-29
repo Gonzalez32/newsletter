@@ -25,29 +25,66 @@ description: Learn more about the Fantasy Football Newsletter and your league
     <div class="columns">
       <div class="column is-8 is-offset-2">
         <div class="content">
-          <h3 class="title is-3">🏈 Welcome to Fantasy Football Newsletter</h3>
-          
+          <h3 class="title is-3">Our Story</h3>
+          <figure class="image is-128x128">
+            <img class="is-rounded" src="/assets/images/skull_carrot.png" />
+          </figure>
           <p class="is-size-5">
-            This is your league's central hub for all things fantasy football! We've created this beautiful, modern website to keep track of your league's newsletters, standings, matchups, and player statistics.
+            What started as a simple email newsletter has grown into something much bigger. 
+            Every week, we bring you the latest stats, the funniest takes, and entertaining commentary on our fantasy football league. 
           </p>
           
-          <h4 class="title is-4 mt-5">📰 What We Do</h4>
-          <ul>
-            <li><strong>Weekly Newsletters:</strong> Archive and display all your hilarious weekly newsletters</li>
-            <li><strong>Team Standings:</strong> Real-time rankings and statistics for all teams</li>
-            <li><strong>Matchup Tracking:</strong> Complete game history with scores and results</li>
-            <li><strong>Player Management:</strong> Roster tracking and player statistics</li>
-            <li><strong>League Dashboard:</strong> Comprehensive overview and quick stats</li>
-          </ul>
-          
-          <h4 class="title is-4 mt-5">🎨 Features</h4>
+          <div class="notification is-info is-light" id="newsletter-counter">
+            <p><strong>Fun Fact:</strong> Our newsletter has been running for <span id="newsletter-days">a few weeks</span>, 
+            and we've never missed a week! (Well, almost never...)</p>
+          </div>
+
+          <script>
+            // Calculate newsletter days since start date
+            function updateNewsletterDays() {
+              // Set your newsletter start date here (YYYY, MM-1, DD)
+              // Note: Month is 0-indexed, so January = 0, February = 1, etc.
+              const startDate = new Date(2025, 6, 28); //   July 28, 2025
+              const today = new Date();
+              
+              // Calculate difference in milliseconds
+              const timeDiff = today.getTime() - startDate.getTime();
+              
+              // Convert to days
+              const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+              
+              // Format the display
+              let displayText;
+              if (daysDiff < 7) {
+                displayText = `${daysDiff} day${daysDiff !== 1 ? 's' : ''}`;
+              } else if (daysDiff < 30) {
+                const weeks = Math.floor(daysDiff / 7);
+                displayText = `${weeks} week${weeks !== 1 ? 's' : ''}`;
+              } else if (daysDiff < 365) {
+                const months = Math.floor(daysDiff / 30);
+                displayText = `${months} month${months !== 1 ? 's' : ''}`;
+              } else {
+                const years = Math.floor(daysDiff / 365);
+                displayText = `${years} year${years !== 1 ? 's' : ''}`;
+              }
+              
+              // Update the span
+              document.getElementById('newsletter-days').textContent = displayText;
+            }
+            
+            // Update when page loads
+            updateNewsletterDays();
+          </script>
+
+          <h4 class="title is-4 mt-5">What You'll Find Here</h4>
           <div class="columns is-multiline">
             <div class="column is-6">
               <div class="card">
                 <div class="card-content">
                   <div class="content has-text-centered">
-                    <h5 class="title is-5">📱 Responsive Design</h5>
-                    <p>Works perfectly on desktop, tablet, and mobile devices</p>
+                    <h5 class="title is-5">📰 Weekly Newsletters</h5>
+                    <p>Our signature weekly newsletters with all the laughs, trash talk, 
+                    and insights you've come to expect.</p>
                   </div>
                 </div>
               </div>
@@ -57,8 +94,9 @@ description: Learn more about the Fantasy Football Newsletter and your league
               <div class="card">
                 <div class="card-content">
                   <div class="content has-text-centered">
-                    <h5 class="title is-5">🎨 Beautiful UI</h5>
-                    <p>Modern design with Bulma CSS framework</p>
+                    <h5 class="title is-5">🏆 League Standings</h5>
+                    <p>Real-time standings, stats, and performance metrics for every team 
+                    in the league.</p>
                   </div>
                 </div>
               </div>
@@ -68,8 +106,9 @@ description: Learn more about the Fantasy Football Newsletter and your league
               <div class="card">
                 <div class="card-content">
                   <div class="content has-text-centered">
-                    <h5 class="title is-5">⚡ Fast Loading</h5>
-                    <p>Static site generation for optimal performance</p>
+                    <h5 class="title is-5">⚔️ Matchup History</h5>
+                    <p>Complete matchup history with scores, winners, and memorable moments 
+                    from every game.</p>
                   </div>
                 </div>
               </div>
@@ -79,52 +118,65 @@ description: Learn more about the Fantasy Football Newsletter and your league
               <div class="card">
                 <div class="card-content">
                   <div class="content has-text-centered">
-                    <h5 class="title is-5">🔒 Secure</h5>
-                    <p>HTTPS enabled with automatic SSL certificates</p>
+                    <h5 class="title is-5">📊 Player Stats</h5>
+                    <p>Detailed player statistics and performance tracking throughout 
+                    the season.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <h4 class="title is-4 mt-5">🛠 Tech Stack</h4>
-          <div class="columns">
-            <div class="column is-6">
-              <ul>
-                <li><strong>Static Site Generator:</strong> Jekyll</li>
-                <li><strong>Frontend Framework:</strong> Bulma CSS</li>
-                <li><strong>Hosting:</strong> GitHub Pages</li>
-                <li><strong>Domain:</strong> Custom domain with SSL</li>
-              </ul>
-            </div>
-            <div class="column is-6">
-              <ul>
-                <li><strong>Data Format:</strong> JSON</li>
-                <li><strong>JavaScript:</strong> Vanilla JS</li>
-                <li><strong>Icons:</strong> Emoji and Font Awesome</li>
-                <li><strong>Deployment:</strong> Automatic via Git</li>
-              </ul>
+          <h4 class="title is-4 mt-5">League Rules & Traditions</h4>
+          <div class="box">
+            <h5 class="title is-5">🏈 League Format</h5>
+            <ul>
+              <li><strong>14 Teams</strong> - Single division format</li>
+              <li><strong>Head-to-Head</strong> - Weekly matchups</li>
+              <li><strong>6 Playoff Spots</strong> - Top 6 teams make the playoffs</li>
+              <li><strong>Standard Scoring</strong> - Yahoo Fantasy Football default settings</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h5 class="title is-5">🎭 Traditions</h5>
+            <ul>
+              <li><strong>Weekly Newsletter</strong> - Every Tuesday or Wednesday-ish.</li>
+              <li><strong>Trash Talk Tuesday In Yahoo Chat</strong> - The day after Monday Night Football</li>
+              <li><strong>Championship Trophy</strong> - Handed down from winner to winner</li>
+              <li><strong>Loser's Bracket</strong> - Toilet Bowl for the bottom 8 teams</li>
+            </ul>
+          </div>
+          
+          <h4 class="title is-4 mt-5">Meet the Commissioner</h4>
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <p class="title is-4">The Commissioner</p>
+                <p class="subtitle is-6">League Manager & Newsletter Author</p>
+                <p>
+                  As the commissioner, I'm responsible for keeping the league running smoothly, 
+                  writing the weekly newsletters, and occasionally making controversial 
+                  decisions that everyone will complain about for weeks.
+                </p>
+                <p>
+                  <strong>Fun Fact 2:</strong> I've been playing fantasy football for over 3 years 
+                  and still haven't won a championship. Yet. 
+                  <br>
+                  <br>
+                  Thanks for reading!
+                  <br>
+                  <br>
+                  - The Commissioner 🥕
+                </p>
+              </div>
             </div>
           </div>
           
-          <h4 class="title is-4 mt-5">📝 How to Update Content</h4>
-          <p>To update your league's content:</p>
-          <ol>
-            <li><strong>Edit JSON files</strong> in <code>assets/data/</code> to update team and league data</li>
-            <li><strong>Add newsletters</strong> by creating new files in <code>_newsletters/</code> directory</li>
-            <li><strong>Commit and push</strong> changes to GitHub</li>
-            <li><strong>GitHub Pages</strong> will automatically rebuild and deploy</li>
-          </ol>
-          
-          <h4 class="title is-4 mt-5">🤝 Contributing</h4>
-          <p>
-            This site is designed to be easily maintainable by league members. If you have suggestions for improvements or want to add new features, feel free to contribute!
-          </p>
-          
-          <div class="notification is-info mt-5">
-            <p class="has-text-centered">
-              <strong>Built with ❤️ and 🏈 for fantasy football enthusiasts everywhere!</strong>
-            </p>
+          <h4 class="title is-4 mt-5">Get Involved</h4>
+          <div class="notification is-warning is-light">
+            <p><strong>Want to join the fun?</strong> While this is a private league, 
+            we're always open to new members if spots become available!</p>
           </div>
         </div>
       </div>
@@ -136,11 +188,11 @@ description: Learn more about the Fantasy Football Newsletter and your league
 <section class="section has-background-dark">
   <div class="container">
     <div class="has-text-centered">
-      <a href="/" class="button is-primary is-large">
-        🏠 Back to Home
+      <a href="{{ '/' | relative_url }}" class="button is-primary is-large">
+        🏈 Back to Home
       </a>
-      <a href="/dashboard/" class="button is-info is-large">
-        📊 Dashboard
+      <a href="{{ '/dashboard/' | relative_url }}" class="button is-info is-large">
+        📊 View Dashboard
       </a>
     </div>
   </div>
