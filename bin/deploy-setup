@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Deployment Setup Script for Fantasy Football Newsletter
+# This script helps you configure your domain deployment
+
+set -e
+
+echo "🚀 Fantasy Football Newsletter Deployment Setup"
+echo "=============================================="
+echo ""
+
+# Check if we're in the right directory
+if [ ! -f "config/deploy.yml" ]; then
+    echo "❌ Error: Please run this script from the root of your Rails application"
+    exit 1
+fi
+
+# Get domain name
+echo "📝 Please enter your domain name (e.g., myfantasyfootball.com):"
+read -r DOMAIN_NAME
+
+if [ -z "$DOMAIN_NAME" ]; then
+    echo "❌ Error: Domain name is required"
+    exit 1
+fi
+
+# Get server IP
+echo "📝 Please enter your server IP address:"
+read -r SERVER_IP
+
+if [ -z "$SERVER_IP" ]; then
+    echo "❌ Error: Server IP is required"
+    exit 1
+fi
+
+# Get Docker Hub username
+echo "📝 Please enter your Docker Hub username:"
+read -r DOCKER_USERNAME
+
+if [ -z "$DOCKER_USERNAME" ]; then
+    echo "❌ Error: Docker Hub username is required"
+    exit 1
+fi
+
+echo ""
+echo "🔧 Updating configuration files..."
+
+# Update deploy.yml with domain and server IP
+sed -i.bak "s/YOUR_DOMAIN_HERE.com/$DOMAIN_NAME/g" config/deploy.yml
+sed -i.bak "s/your-dockerhub-username/$DOCKER_USERNAME/g" config/deploy.yml
+sed -i.bak "s/192.168.0.1/$SERVER_IP/g" config/deploy.yml
+
+# Remove backup files
+rm -f config/deploy.yml.bak
+
+echo "✅ Configuration updated successfully!"
+echo ""
+
+echo "📋 Next Steps:"
+echo "=============="
+echo ""
+echo "1. 🔑 Set up Docker Hub access token:"
+echo "   - Go to Docker Hub → Account Settings → Security"
+echo "   - Create a new access token"
+echo "   - Run: export KAMAL_REGISTRY_PASSWORD=your_token"
+echo ""
+echo "2. 🌐 Point your domain to your server:"
+echo "   - Add A record: $DOMAIN_NAME → $SERVER_IP"
+echo "   - Wait for DNS propagation (usually 15-60 minutes)"
+echo ""
+echo "3. 🖥️  Prepare your server:"
+echo "   - SSH: ssh root@$SERVER_IP"
+echo "   - Install Docker: curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh"
+echo "   - Install Kamal: curl -fsSL https://raw.githubusercontent.com/basecamp/kamal/main/bin/kamal | bash"
+echo ""
+echo "4. 🚀 Deploy your application:"
+echo "   - Run: bin/kamal deploy"
+echo "   - Run: bin/kamal app exec bin/rails db:migrate"
+echo "   - Run: bin/kamal app exec bin/rails db:seed"
+echo ""
+echo "5. ✅ Verify deployment:"
+echo "   - Visit: https://$DOMAIN_NAME"
+echo ""
+echo "📖 For detailed instructions, see DEPLOYMENT.md"
+echo ""
+echo "🎉 Good luck with your deployment!" 
